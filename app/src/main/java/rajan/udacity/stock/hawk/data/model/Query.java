@@ -11,7 +11,7 @@ import android.os.Parcelable;
 public class Query implements Parcelable {
 
     @SerializedName("count")
-    Integer mCount;
+    Integer mCount = 0;
 
     @SerializedName("created")
     String mCreated;
@@ -20,7 +20,7 @@ public class Query implements Parcelable {
     String mLang;
 
     @SerializedName("results")
-    Result mResult;
+    Result mResult = new Result();
 
     public Integer getCount() {
         return mCount;

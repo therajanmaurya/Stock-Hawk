@@ -19,7 +19,8 @@ public class DataManager {
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public DataManager(StocksService stocksService, PreferencesHelper preferencesHelper,
+    public DataManager(StocksService stocksService,
+                       PreferencesHelper preferencesHelper,
                        DatabaseHelper databaseHelper) {
         mStocksService = stocksService;
         mPreferencesHelper = preferencesHelper;
@@ -31,7 +32,7 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-        return null;
+        return mStocksService.getStocks();
     }
 
     public Observable<List<Stock>> getStocks() {

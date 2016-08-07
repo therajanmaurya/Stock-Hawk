@@ -8,7 +8,7 @@ import android.os.Parcelable;
 public class Stock implements Parcelable {
 
     @SerializedName("query")
-    Query mQuery;
+    Query mQuery = new Query();
 
     public Query getQuery() {
         return mQuery;

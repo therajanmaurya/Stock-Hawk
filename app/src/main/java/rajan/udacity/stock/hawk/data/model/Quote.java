@@ -29,7 +29,7 @@ public class Quote implements Parcelable {
     String mChangePercentChange;
 
     @SerializedName("Change")
-    Integer mChange;
+    Double mChange;
 
     @SerializedName("Currency")
     String mCurrency;
@@ -38,16 +38,16 @@ public class Quote implements Parcelable {
     String mLastTradeDate;
 
     @SerializedName("EarningsShare")
-    Integer mEarningsShare;
+    Double mEarningsShare;
 
     @SerializedName("EPSEstimateCurrentYear")
-    Double mEPSEstimateCurrentYear;
+    String mEPSEstimateCurrentYear;
 
     @SerializedName("EPSEstimateNextYear")
-    Double mEPSEstimateNextYear;
+    String mEPSEstimateNextYear;
 
     @SerializedName("EPSEstimateNextQuarter")
-    Double mEPSEstimateNextQuarter;
+    String mEPSEstimateNextQuarter;
 
     @SerializedName("DaysLow")
     Double mDaysLow;
@@ -74,7 +74,7 @@ public class Quote implements Parcelable {
     String mPercentChangeFromYearLow;
 
     @SerializedName("ChangeFromYearHigh")
-    Integer mChangeFromYearHigh;
+    Double mChangeFromYearHigh;
 
     @SerializedName("PercebtChangeFromYearHigh")
     String mPercebtChangeFromYearHigh;
@@ -205,11 +205,11 @@ public class Quote implements Parcelable {
         mChangePercentChange = changePercentChange;
     }
 
-    public Integer getChange() {
+    public Double getChange() {
         return mChange;
     }
 
-    public void setChange(Integer change) {
+    public void setChange(Double change) {
         mChange = change;
     }
 
@@ -229,35 +229,35 @@ public class Quote implements Parcelable {
         mLastTradeDate = lastTradeDate;
     }
 
-    public Integer getEarningsShare() {
+    public Double getEarningsShare() {
         return mEarningsShare;
     }
 
-    public void setEarningsShare(Integer earningsShare) {
+    public void setEarningsShare(Double earningsShare) {
         mEarningsShare = earningsShare;
     }
 
-    public Double getEPSEstimateCurrentYear() {
+    public String getEPSEstimateCurrentYear() {
         return mEPSEstimateCurrentYear;
     }
 
-    public void setEPSEstimateCurrentYear(Double EPSEstimateCurrentYear) {
+    public void setEPSEstimateCurrentYear(String EPSEstimateCurrentYear) {
         mEPSEstimateCurrentYear = EPSEstimateCurrentYear;
     }
 
-    public Double getEPSEstimateNextYear() {
+    public String getEPSEstimateNextYear() {
         return mEPSEstimateNextYear;
     }
 
-    public void setEPSEstimateNextYear(Double EPSEstimateNextYear) {
+    public void setEPSEstimateNextYear(String EPSEstimateNextYear) {
         mEPSEstimateNextYear = EPSEstimateNextYear;
     }
 
-    public Double getEPSEstimateNextQuarter() {
+    public String getEPSEstimateNextQuarter() {
         return mEPSEstimateNextQuarter;
     }
 
-    public void setEPSEstimateNextQuarter(Double EPSEstimateNextQuarter) {
+    public void setEPSEstimateNextQuarter(String EPSEstimateNextQuarter) {
         mEPSEstimateNextQuarter = EPSEstimateNextQuarter;
     }
 
@@ -325,11 +325,11 @@ public class Quote implements Parcelable {
         mPercentChangeFromYearLow = percentChangeFromYearLow;
     }
 
-    public Integer getChangeFromYearHigh() {
+    public Double getChangeFromYearHigh() {
         return mChangeFromYearHigh;
     }
 
-    public void setChangeFromYearHigh(Integer changeFromYearHigh) {
+    public void setChangeFromYearHigh(Double changeFromYearHigh) {
         mChangeFromYearHigh = changeFromYearHigh;
     }
 
@@ -678,13 +678,13 @@ public class Quote implements Parcelable {
         this.mBid = (Double) in.readValue(Double.class.getClassLoader());
         this.mBookValue = (Double) in.readValue(Double.class.getClassLoader());
         this.mChangePercentChange = in.readString();
-        this.mChange = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.mChange = (Double) in.readValue(Double.class.getClassLoader());
         this.mCurrency = in.readString();
         this.mLastTradeDate = in.readString();
-        this.mEarningsShare = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.mEPSEstimateCurrentYear = (Double) in.readValue(Double.class.getClassLoader());
-        this.mEPSEstimateNextYear = (Double) in.readValue(Double.class.getClassLoader());
-        this.mEPSEstimateNextQuarter = (Double) in.readValue(Double.class.getClassLoader());
+        this.mEarningsShare = (Double) in.readValue(Double.class.getClassLoader());
+        this.mEPSEstimateCurrentYear = (String) in.readValue(String.class.getClassLoader());
+        this.mEPSEstimateNextYear = (String) in.readValue(String.class.getClassLoader());
+        this.mEPSEstimateNextQuarter = (String) in.readValue(String.class.getClassLoader());
         this.mDaysLow = (Double) in.readValue(Double.class.getClassLoader());
         this.DaysHigh = (Double) in.readValue(Double.class.getClassLoader());
         this.mYearLow = (Double) in.readValue(Double.class.getClassLoader());
@@ -693,7 +693,7 @@ public class Quote implements Parcelable {
         this.mEBITDA = in.readString();
         this.mChangeFromYearLow = (Double) in.readValue(Double.class.getClassLoader());
         this.mPercentChangeFromYearLow = in.readString();
-        this.mChangeFromYearHigh = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.mChangeFromYearHigh = (Double) in.readValue(Double.class.getClassLoader());
         this.mPercebtChangeFromYearHigh = in.readString();
         this.mLastTradeWithTime = in.readString();
         this.mLastTradePriceOnly = (Double) in.readValue(Double.class.getClassLoader());
