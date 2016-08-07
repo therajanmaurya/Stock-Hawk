@@ -19,7 +19,8 @@ public class DataManager {
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public DataManager(StocksService stocksService, PreferencesHelper preferencesHelper,
+    public DataManager(StocksService stocksService,
+                       PreferencesHelper preferencesHelper,
                        DatabaseHelper databaseHelper) {
         mStocksService = stocksService;
         mPreferencesHelper = preferencesHelper;
@@ -31,7 +32,12 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-        return null;
+
+        String mQuery = "select+*+from+yahoo.finance.quotes+where+symbol+in+%28%22YHOO%22%2C%22AAPL%" +
+                "22%2C%22GOOG%22%2C%22MSFT%22%2C%22ch%22%29&format=json&diagnostics=" +
+                "true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+
+        return mStocksService.getStocks(mQuery);
     }
 
     public Observable<List<Stock>> getStocks() {

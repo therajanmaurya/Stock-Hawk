@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -18,14 +15,14 @@ import rajan.udacity.stock.hawk.data.model.Stock;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
-    private List<Stock> mStocks;
+    private Stock mStocks;
 
     @Inject
     public StockAdapter() {
-        mStocks = new ArrayList<>();
+        mStocks = new Stock();
     }
 
-    public void setStocks(List<Stock> stocks) {
+    public void setStocks(Stock stocks) {
         mStocks = stocks;
     }
 

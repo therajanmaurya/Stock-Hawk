@@ -7,9 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -72,7 +69,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     /***** MVP View methods implementation *****/
 
     @Override
-    public void showStocks(List<Stock> stocks) {
+    public void showStocks(Stock stocks) {
         mStocksAdapter.setStocks(stocks);
         mStocksAdapter.notifyDataSetChanged();
     }
@@ -85,7 +82,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void showStocksEmpty() {
-        mStocksAdapter.setStocks(Collections.<Stock>emptyList());
+        mStocksAdapter.setStocks(new Stock());
         mStocksAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
     }
