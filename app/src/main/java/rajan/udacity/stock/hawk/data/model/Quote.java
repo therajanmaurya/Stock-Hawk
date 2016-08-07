@@ -29,7 +29,7 @@ public class Quote implements Parcelable {
     String mChangePercentChange;
 
     @SerializedName("Change")
-    Integer mChange;
+    Double mChange;
 
     @SerializedName("Currency")
     String mCurrency;
@@ -205,11 +205,11 @@ public class Quote implements Parcelable {
         mChangePercentChange = changePercentChange;
     }
 
-    public Integer getChange() {
+    public Double getChange() {
         return mChange;
     }
 
-    public void setChange(Integer change) {
+    public void setChange(Double change) {
         mChange = change;
     }
 
@@ -678,7 +678,7 @@ public class Quote implements Parcelable {
         this.mBid = (Double) in.readValue(Double.class.getClassLoader());
         this.mBookValue = (Double) in.readValue(Double.class.getClassLoader());
         this.mChangePercentChange = in.readString();
-        this.mChange = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.mChange = (Double) in.readValue(Double.class.getClassLoader());
         this.mCurrency = in.readString();
         this.mLastTradeDate = in.readString();
         this.mEarningsShare = (Integer) in.readValue(Integer.class.getClassLoader());

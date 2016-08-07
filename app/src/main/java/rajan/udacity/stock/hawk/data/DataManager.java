@@ -32,12 +32,7 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-
-        String mQuery = "select+*+from+yahoo.finance.quotes+where+symbol+in+%28%22YHOO%22%2C%22AAPL%" +
-                "22%2C%22GOOG%22%2C%22MSFT%22%2C%22ch%22%29&format=json&diagnostics=" +
-                "true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
-
-        return mStocksService.getStocks(mQuery);
+        return mStocksService.getStocks();
     }
 
     public Observable<List<Stock>> getStocks() {
