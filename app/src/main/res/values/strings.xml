@@ -7,6 +7,6 @@
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_error_title">Sorry</string>
 
-    <string name="empty_ribots">There aren\'t any ribots</string>
-    <string name="error_loading_ribots">There was a problem loading the ribots</string>
+    <string name="empty_stocks">There aren\'t any Stocks</string>
+    <string name="error_loading_stocks">There was a problem loading the stocks</string>
 </resources>

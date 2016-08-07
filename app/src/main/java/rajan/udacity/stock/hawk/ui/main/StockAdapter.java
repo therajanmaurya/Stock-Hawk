@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
+import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.data.model.Stock;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
@@ -35,11 +36,16 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
+        Quote quote = mStocks.getQuery().getResult().getQuote().get(position);
+
+        holder.tv_stock_symbol.setText(quote.getMsymbol());
+        holder.tv_bid_price.setText(String.valueOf(quote.getBid()));
+        holder.tv_change.setText(quote.getChangeinPercent());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return mStocks.getQuery().getCount();
     }
 
     class StockViewHolder extends RecyclerView.ViewHolder {

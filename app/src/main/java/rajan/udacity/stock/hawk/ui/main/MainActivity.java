@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_loading_ribots))
+        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_loading_stocks))
                 .show();
     }
 
@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     public void showStocksEmpty() {
         mStocksAdapter.setStocks(new Stock());
         mStocksAdapter.notifyDataSetChanged();
-        Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.empty_stocks, Toast.LENGTH_LONG).show();
     }
 
 }

@@ -3,6 +3,7 @@ package rajan.udacity.stock.hawk.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class Result implements Parcelable {
 
-    List<Quote> quote;
+    List<Quote> quote = new ArrayList<>();
 
     public List<Quote> getQuote() {
         return quote;
