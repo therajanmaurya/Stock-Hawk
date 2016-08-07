@@ -19,30 +19,30 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-    >
+            android:paddingRight="16dp">
+
         <TextView
                 android:id="@+id/stock_symbol"
                 style="@style/StockSymbolTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                tools:text="GOOG"
-        />
+                tools:text="GOOG"/>
+
         <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end"
-        >
+                android:gravity="end">
+
             <TextView
                     android:id="@+id/bid_price"
                     style="@style/BidPriceTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="10sp"
-                    tools:text="1000.00"
-            />
+                    tools:text="1000.00"/>
+
             <TextView
                     android:id="@+id/change"
                     android:background="@drawable/percent_change_pill"
@@ -51,8 +51,8 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
-                    tools:text="100%"
-            />
+                    tools:text="100%"/>
+
         </LinearLayout>
     </LinearLayout>
 

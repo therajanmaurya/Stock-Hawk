@@ -30,10 +30,10 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         if (mSubscription != null) mSubscription.unsubscribe();
     }
 
-    public void loadRibots() {
+    public void loadStocks() {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        /*mSubscription = mDataManager.getRibots()
+        /*mSubscription = mDataManager.getStocks()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Stock>>() {

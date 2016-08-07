@@ -31,7 +31,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Inject
     StockAdapter mStocksAdapter;
 
-    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     /**
      * Return an Intent to start this Activity.
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         mRecyclerView.setAdapter(mStocksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMainPresenter.attachView(this);
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadStocks();
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));
@@ -71,8 +72,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     /***** MVP View methods implementation *****/
 
     @Override
-    public void showStocks(List<Stock> ribots) {
-        mStocksAdapter.setStocks(ribots);
+    public void showStocks(List<Stock> stocks) {
+        mStocksAdapter.setStocks(stocks);
         mStocksAdapter.notifyDataSetChanged();
     }
 

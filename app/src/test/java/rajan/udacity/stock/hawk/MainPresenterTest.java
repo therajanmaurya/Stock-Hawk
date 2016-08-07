@@ -39,7 +39,7 @@ public class MainPresenterTest {
         when(mMockDataManager.getStocks())
                 .thenReturn(Observable.just(ribots));
 
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadStocks();
         verify(mMockMainMvpView).showStocks(ribots);
         verify(mMockMainMvpView, never()).showStocksEmpty();
         verify(mMockMainMvpView, never()).showError();
@@ -50,7 +50,7 @@ public class MainPresenterTest {
         when(mMockDataManager.getStocks())
                 .thenReturn(Observable.just(Collections.<Stock>emptyList()));
 
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadStocks();
         verify(mMockMainMvpView).showStocksEmpty();
         verify(mMockMainMvpView, never()).showStocks(anyListOf(Stock.class));
         verify(mMockMainMvpView, never()).showError();
@@ -61,7 +61,7 @@ public class MainPresenterTest {
         when(mMockDataManager.getStocks())
                 .thenReturn(Observable.<List<Stock>>error(new RuntimeException()));
 
-        mMainPresenter.loadRibots();
+        mMainPresenter.loadStocks();
         verify(mMockMainMvpView).showError();
         verify(mMockMainMvpView, never()).showStocksEmpty();
         verify(mMockMainMvpView, never()).showStocks(anyListOf(Stock.class));
