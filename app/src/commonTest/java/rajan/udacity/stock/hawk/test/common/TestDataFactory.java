@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import rajan.udacity.stock.hawk.data.model.Name;
-import rajan.udacity.stock.hawk.data.model.Profile;
 import rajan.udacity.stock.hawk.data.model.Stock;
 
 /**

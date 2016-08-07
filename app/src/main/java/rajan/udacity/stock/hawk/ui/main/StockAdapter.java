@@ -1,6 +1,5 @@
 package rajan.udacity.stock.hawk.ui.main;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,29 +32,24 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
     @Override
     public StockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_ribot, parent, false);
+                .inflate(R.layout.item_stock, parent, false);
         return new StockViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
-        Stock ribot = mStocks.get(position);
-        holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
-        holder.nameTextView.setText(String.format("%s %s",
-                ribot.profile().name().first(), ribot.profile().name().last()));
-        holder.emailTextView.setText(ribot.profile().email());
     }
 
     @Override
     public int getItemCount() {
-        return mStocks.size();
+        return 5;
     }
 
     class StockViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.view_hex_color) View hexColorView;
-        @BindView(R.id.text_name) TextView nameTextView;
-        @BindView(R.id.text_email) TextView emailTextView;
+        @BindView(R.id.stock_symbol) TextView tv_stock_symbol;
+        @BindView(R.id.bid_price) TextView tv_bid_price;
+        @BindView(R.id.change) TextView tv_change;
 
         public StockViewHolder(View itemView) {
             super(itemView);

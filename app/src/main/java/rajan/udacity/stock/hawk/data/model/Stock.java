@@ -1,28 +1,59 @@
 package rajan.udacity.stock.hawk.data.model;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
+import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
-@AutoValue
-public abstract class Stock implements Comparable<Stock>, Parcelable {
+public class Stock implements Parcelable {
 
-    public abstract Profile profile();
+    @SerializedName("query")
+    Query mQuery;
 
-    public static Stock create(Profile profile) {
-        return new AutoValue_Ribot(profile);
+    public Query getQuery() {
+        return mQuery;
     }
 
-    public static TypeAdapter<Stock> typeAdapter(Gson gson) {
-        return new AutoValue_Ribot.GsonTypeAdapter(gson);
+    public void setQuery(Query query) {
+        mQuery = query;
     }
 
     @Override
-    public int compareTo(@NonNull Stock another) {
-        return profile().name().first().compareToIgnoreCase(another.profile().name().first());
+    public String toString() {
+        return "Stock{" +
+                "mQuery=" + mQuery +
+                '}';
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.mQuery, flags);
+    }
+
+    public Stock() {
+    }
+
+    protected Stock(Parcel in) {
+        this.mQuery = in.readParcelable(Query.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Stock> CREATOR = new Parcelable.Creator<Stock>() {
+        @Override
+        public Stock createFromParcel(Parcel source) {
+            return new Stock(source);
+        }
+
+        @Override
+        public Stock[] newArray(int size) {
+            return new Stock[size];
+        }
+    };
 }
+
 
