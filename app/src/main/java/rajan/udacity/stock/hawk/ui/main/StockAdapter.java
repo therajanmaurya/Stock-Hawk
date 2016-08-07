@@ -1,6 +1,5 @@
 package rajan.udacity.stock.hawk.ui.main;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +39,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
         Stock ribot = mStocks.get(position);
-        holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
-        holder.nameTextView.setText(String.format("%s %s",
-                ribot.profile().name().first(), ribot.profile().name().last()));
-        holder.emailTextView.setText(ribot.profile().email());
     }
 
     @Override

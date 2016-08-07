@@ -2,7 +2,6 @@ package rajan.udacity.stock.hawk.data.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ryanharter.auto.value.gson.AutoValueGsonTypeAdapterFactory;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ public interface StocksService {
 
         public static StocksService newStocksService() {
             Gson gson = new GsonBuilder()
-                    .registerTypeAdapterFactory(new AutoValueGsonTypeAdapterFactory())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     .create();
             Retrofit retrofit = new Retrofit.Builder()
