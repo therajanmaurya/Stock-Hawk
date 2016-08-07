@@ -10,7 +10,7 @@ import rajan.udacity.stock.hawk.data.DataManager;
 import rajan.udacity.stock.hawk.data.SyncService;
 import rajan.udacity.stock.hawk.data.local.DatabaseHelper;
 import rajan.udacity.stock.hawk.data.local.PreferencesHelper;
-import rajan.udacity.stock.hawk.data.remote.RibotsService;
+import rajan.udacity.stock.hawk.data.remote.StocksService;
 import rajan.udacity.stock.hawk.injection.ApplicationContext;
 import rajan.udacity.stock.hawk.injection.module.ApplicationModule;
 import rajan.udacity.stock.hawk.util.RxEventBus;
@@ -23,7 +23,7 @@ public interface ApplicationComponent {
 
     @ApplicationContext Context context();
     Application application();
-    RibotsService ribotsService();
+    StocksService ribotsService();
     PreferencesHelper preferencesHelper();
     DatabaseHelper databaseHelper();
     DataManager dataManager();

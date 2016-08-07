@@ -6,34 +6,34 @@ import com.ryanharter.auto.value.gson.AutoValueGsonTypeAdapterFactory;
 
 import java.util.List;
 
+import rajan.udacity.stock.hawk.data.model.Stock;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import rx.Observable;
-import rajan.udacity.stock.hawk.data.model.Ribot;
 
-public interface RibotsService {
+public interface StocksService {
 
     String ENDPOINT = "https://api.ribot.io/";
 
     @GET("ribots")
-    Observable<List<Ribot>> getRibots();
+    Observable<List<Stock>> getStocks();
 
     /******** Helper class that sets up a new services *******/
     class Creator {
 
-        public static RibotsService newRibotsService() {
+        public static StocksService newStocksService() {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapterFactory(new AutoValueGsonTypeAdapterFactory())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     .create();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(RibotsService.ENDPOINT)
+                    .baseUrl(StocksService.ENDPOINT)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
-            return retrofit.create(RibotsService.class);
+            return retrofit.create(StocksService.class);
         }
     }
 }

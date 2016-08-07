@@ -5,24 +5,23 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import rx.Observable;
-import rx.functions.Func1;
 import rajan.udacity.stock.hawk.data.local.DatabaseHelper;
 import rajan.udacity.stock.hawk.data.local.PreferencesHelper;
-import rajan.udacity.stock.hawk.data.model.Ribot;
-import rajan.udacity.stock.hawk.data.remote.RibotsService;
+import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.data.remote.StocksService;
+import rx.Observable;
 
 @Singleton
 public class DataManager {
 
-    private final RibotsService mRibotsService;
+    private final StocksService mStocksService;
     private final DatabaseHelper mDatabaseHelper;
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public DataManager(RibotsService ribotsService, PreferencesHelper preferencesHelper,
+    public DataManager(StocksService stocksService, PreferencesHelper preferencesHelper,
                        DatabaseHelper databaseHelper) {
-        mRibotsService = ribotsService;
+        mStocksService = stocksService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
     }
@@ -31,18 +30,12 @@ public class DataManager {
         return mPreferencesHelper;
     }
 
-    public Observable<Ribot> syncRibots() {
-        return mRibotsService.getRibots()
-                .concatMap(new Func1<List<Ribot>, Observable<Ribot>>() {
-                    @Override
-                    public Observable<Ribot> call(List<Ribot> ribots) {
-                        return mDatabaseHelper.setRibots(ribots);
-                    }
-                });
+    public Observable<Stock> syncStocks() {
+        return null;
     }
 
-    public Observable<List<Ribot>> getRibots() {
-        return mDatabaseHelper.getRibots().distinct();
+    public Observable<List<Stock>> getStocks() {
+        return null;
     }
 
 }

@@ -9,18 +9,17 @@ import android.os.IBinder;
 
 import javax.inject.Inject;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.schedulers.Schedulers;
-import timber.log.Timber;
 import rajan.udacity.stock.hawk.StockHawkApplication;
-import rajan.udacity.stock.hawk.data.model.Ribot;
 import rajan.udacity.stock.hawk.util.AndroidComponentUtil;
 import rajan.udacity.stock.hawk.util.NetworkUtil;
+import rx.Subscription;
+import timber.log.Timber;
 
 public class SyncService extends Service {
 
-    @Inject DataManager mDataManager;
+    @Inject
+    DataManager mDataManager;
+
     private Subscription mSubscription;
 
     public static Intent getStartIntent(Context context) {
@@ -49,26 +48,6 @@ public class SyncService extends Service {
         }
 
         if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-        mSubscription = mDataManager.syncRibots()
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Ribot>() {
-                    @Override
-                    public void onCompleted() {
-                        Timber.i("Synced successfully!");
-                        stopSelf(startId);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.w(e, "Error syncing.");
-                        stopSelf(startId);
-
-                    }
-
-                    @Override
-                    public void onNext(Ribot ribot) {
-                    }
-                });
 
         return START_STICKY;
     }

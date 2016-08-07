@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import rajan.udacity.stock.hawk.data.DataManager;
-import rajan.udacity.stock.hawk.data.remote.RibotsService;
+import rajan.udacity.stock.hawk.data.remote.StocksService;
 import rajan.udacity.stock.hawk.injection.ApplicationContext;
 
 import static org.mockito.Mockito.mock;
@@ -47,8 +47,8 @@ public class ApplicationTestModule {
 
     @Provides
     @Singleton
-    RibotsService provideRibotsService() {
-        return mock(RibotsService.class);
+    StocksService provideRibotsService() {
+        return mock(StocksService.class);
     }
 
 }

@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import rajan.udacity.stock.hawk.data.remote.RibotsService;
+import rajan.udacity.stock.hawk.data.remote.StocksService;
 import rajan.udacity.stock.hawk.injection.ApplicationContext;
 
 /**
@@ -34,8 +34,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    RibotsService provideRibotsService() {
-        return RibotsService.Creator.newRibotsService();
+    StocksService provideRibotsService() {
+        return StocksService.Creator.newStocksService();
     }
 
 }

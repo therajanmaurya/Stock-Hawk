@@ -15,31 +15,31 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
-import rajan.udacity.stock.hawk.data.model.Ribot;
+import rajan.udacity.stock.hawk.data.model.Stock;
 
-public class StockAdapter extends RecyclerView.Adapter<StockAdapter.RibotViewHolder> {
+public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
-    private List<Ribot> mRibots;
+    private List<Stock> mStocks;
 
     @Inject
     public StockAdapter() {
-        mRibots = new ArrayList<>();
+        mStocks = new ArrayList<>();
     }
 
-    public void setRibots(List<Ribot> ribots) {
-        mRibots = ribots;
+    public void setStocks(List<Stock> stocks) {
+        mStocks = stocks;
     }
 
     @Override
-    public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_ribot, parent, false);
-        return new RibotViewHolder(itemView);
+        return new StockViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final RibotViewHolder holder, int position) {
-        Ribot ribot = mRibots.get(position);
+    public void onBindViewHolder(final StockViewHolder holder, int position) {
+        Stock ribot = mStocks.get(position);
         holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
         holder.nameTextView.setText(String.format("%s %s",
                 ribot.profile().name().first(), ribot.profile().name().last()));
@@ -48,16 +48,16 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.RibotViewHol
 
     @Override
     public int getItemCount() {
-        return mRibots.size();
+        return mStocks.size();
     }
 
-    class RibotViewHolder extends RecyclerView.ViewHolder {
+    class StockViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.view_hex_color) View hexColorView;
         @BindView(R.id.text_name) TextView nameTextView;
         @BindView(R.id.text_email) TextView emailTextView;
 
-        public RibotViewHolder(View itemView) {
+        public StockViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

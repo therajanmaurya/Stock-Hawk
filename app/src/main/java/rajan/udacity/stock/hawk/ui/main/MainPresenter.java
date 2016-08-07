@@ -1,19 +1,12 @@
 package rajan.udacity.stock.hawk.ui.main;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import timber.log.Timber;
 import rajan.udacity.stock.hawk.data.DataManager;
-import rajan.udacity.stock.hawk.data.model.Ribot;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
 import rajan.udacity.stock.hawk.util.RxUtil;
+import rx.Subscription;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {
@@ -40,10 +33,10 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     public void loadRibots() {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getRibots()
+        /*mSubscription = mDataManager.getRibots()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<List<Ribot>>() {
+                .subscribe(new Subscriber<List<Stock>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -55,14 +48,14 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     }
 
                     @Override
-                    public void onNext(List<Ribot> ribots) {
+                    public void onNext(List<Stock> ribots) {
                         if (ribots.isEmpty()) {
-                            getMvpView().showRibotsEmpty();
+                            getMvpView().showStocksEmpty();
                         } else {
-                            getMvpView().showRibots(ribots);
+                            getMvpView().showStocks(ribots);
                         }
                     }
-                });
+                });*/
     }
 
 }

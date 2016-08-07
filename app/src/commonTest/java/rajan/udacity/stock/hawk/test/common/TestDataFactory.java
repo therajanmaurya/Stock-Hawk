@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import rajan.udacity.stock.hawk.data.model.Name;
 import rajan.udacity.stock.hawk.data.model.Profile;
-import rajan.udacity.stock.hawk.data.model.Ribot;
+import rajan.udacity.stock.hawk.data.model.Stock;
 
 /**
  * Factory class that makes instances of data models with random field values.
@@ -19,12 +19,12 @@ public class TestDataFactory {
         return UUID.randomUUID().toString();
     }
 
-    public static Ribot makeRibot(String uniqueSuffix) {
-        return Ribot.create(makeProfile(uniqueSuffix));
+    public static Stock makeRibot(String uniqueSuffix) {
+        return Stock.create(makeProfile(uniqueSuffix));
     }
 
-    public static List<Ribot> makeListRibots(int number) {
-        List<Ribot> ribots = new ArrayList<>();
+    public static List<Stock> makeListRibots(int number) {
+        List<Stock> ribots = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             ribots.add(makeRibot(String.valueOf(i)));
         }

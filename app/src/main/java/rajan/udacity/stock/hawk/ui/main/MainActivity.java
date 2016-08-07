@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
 import rajan.udacity.stock.hawk.data.SyncService;
-import rajan.udacity.stock.hawk.data.model.Ribot;
+import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
 import rajan.udacity.stock.hawk.util.DialogFactory;
 
@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     MainPresenter mMainPresenter;
 
     @Inject
-    StockAdapter mRibotsAdapter;
+    StockAdapter mStocksAdapter;
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
 
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mRecyclerView.setAdapter(mRibotsAdapter);
+        mRecyclerView.setAdapter(mStocksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMainPresenter.attachView(this);
         mMainPresenter.loadRibots();
@@ -71,9 +71,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     /***** MVP View methods implementation *****/
 
     @Override
-    public void showRibots(List<Ribot> ribots) {
-        mRibotsAdapter.setRibots(ribots);
-        mRibotsAdapter.notifyDataSetChanged();
+    public void showStocks(List<Stock> ribots) {
+        mStocksAdapter.setStocks(ribots);
+        mStocksAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -83,9 +83,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     @Override
-    public void showRibotsEmpty() {
-        mRibotsAdapter.setRibots(Collections.<Ribot>emptyList());
-        mRibotsAdapter.notifyDataSetChanged();
+    public void showStocksEmpty() {
+        mStocksAdapter.setStocks(Collections.<Stock>emptyList());
+        mStocksAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
     }
 

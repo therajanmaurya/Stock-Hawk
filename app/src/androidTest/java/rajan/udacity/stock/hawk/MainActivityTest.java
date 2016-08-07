@@ -1,21 +1,20 @@
 package rajan.udacity.stock.hawk;
 
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
+import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
 import java.util.List;
 
-import rx.Observable;
-import rajan.udacity.stock.hawk.data.model.Ribot;
+import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.test.common.TestComponentRule;
 import rajan.udacity.stock.hawk.test.common.TestDataFactory;
 import rajan.udacity.stock.hawk.ui.main.MainActivity;
@@ -25,7 +24,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -50,22 +48,22 @@ public class MainActivityTest {
     public final TestRule chain = RuleChain.outerRule(component).around(main);
 
     @Test
-    public void listOfRibotsShows() {
-        List<Ribot> testDataRibots = TestDataFactory.makeListRibots(20);
-        when(component.getMockDataManager().getRibots())
-                .thenReturn(Observable.just(testDataRibots));
+    public void listOfStocksShows() {
+        List<Stock> testDataStocks = TestDataFactory.makeListRibots(20);
+       /* when(component.getMockDataManager().getRibots())
+                .thenReturn(Observable.just(testDataRibots));*/
 
         main.launchActivity(null);
 
         int position = 0;
-        for (Ribot ribot : testDataRibots) {
+        for (Stock stock : testDataStocks) {
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
-            String name = String.format("%s %s", ribot.profile().name().first(),
-                    ribot.profile().name().last());
+            String name = String.format("%s %s", stock.profile().name().first(),
+                    stock.profile().name().last());
             onView(withText(name))
                     .check(matches(isDisplayed()));
-            onView(withText(ribot.profile().email()))
+            onView(withText(stock.profile().email()))
                     .check(matches(isDisplayed()));
             position++;
         }
