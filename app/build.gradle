@@ -90,6 +90,7 @@ dependencies {
     final RUNNER_VERSION = '0.4'
     final BUTTERKNIFE_VERSION = '8.1.0'
     final AUTO_VALUE_VERSION = '1.2'
+    final DBFLOW_VERSION = '3.1.1'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     def jUnit = "junit:junit:4.12"
@@ -115,6 +116,11 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
         transitive = true;
     }
+
+    //DBFlow Sqlite orm
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:$DBFLOW_VERSION"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:$DBFLOW_VERSION"
+    compile "com.github.Raizlabs.DBFlow:dbflow:$DBFLOW_VERSION"
 
     compile 'com.jakewharton.timber:timber:4.1.2'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
