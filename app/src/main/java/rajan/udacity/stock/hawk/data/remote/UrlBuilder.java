@@ -8,19 +8,29 @@ import java.net.URLEncoder;
  */
 public class UrlBuilder {
 
-    StringBuilder urlStringBuilder = new StringBuilder();
 
 
-    public void addYahooBaseUrl() {
-        try{
-            // Base URL for the Yahoo query
-            urlStringBuilder.append("https://query.yahooapis.com/v1/public/yql?q=");
-            urlStringBuilder.append(URLEncoder
+
+    public StringBuilder baseUrl() {
+
+        StringBuilder baseUrlBuilder = new StringBuilder();
+        // Base URL for the Yahoo query
+        baseUrlBuilder.append("https://query.yahooapis.com/v1/public/yql");
+            /*urlStringBuilder.append(
+                    URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));*/
+        return baseUrlBuilder;
+    }
+
+    public static StringBuilder yahooSelectQuotesQuery() {
+
+        StringBuilder queryBuilder = new StringBuilder();
+        try {
+            queryBuilder.append(URLEncoder
                     .encode("select * from yahoo.finance.quotes where symbol " + "in (", "UTF-8"));
-            urlStringBuilder.append(
-                    URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        return queryBuilder;
     }
 }
