@@ -11,13 +11,11 @@ public class UrlBuilder {
 
 
 
-    public StringBuilder baseUrl() {
+    public static StringBuilder baseUrl() {
 
         StringBuilder baseUrlBuilder = new StringBuilder();
         // Base URL for the Yahoo query
         baseUrlBuilder.append("https://query.yahooapis.com/v1/public/yql");
-            /*urlStringBuilder.append(
-                    URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));*/
         return baseUrlBuilder;
     }
 
@@ -32,5 +30,18 @@ public class UrlBuilder {
         }
 
         return queryBuilder;
+    }
+
+    public StringBuilder addStockSymbol(String symbol) {
+        
+        StringBuilder stockSymbolBuilder = new StringBuilder();
+
+        try {
+            stockSymbolBuilder.append(URLEncoder.encode("\"" + symbol + "\")", "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return stockSymbolBuilder;
     }
 }
