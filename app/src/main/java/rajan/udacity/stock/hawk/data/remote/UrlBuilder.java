@@ -2,8 +2,6 @@ package rajan.udacity.stock.hawk.data.remote;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Rajan Maurya on 15/08/16.
@@ -32,7 +30,13 @@ public class UrlBuilder {
      */
     public static void addStockSymbol(String... symbol) {
 
-        List<String> stocksSymbols = Arrays.asList(symbol);
+        try {
+            urlBuilder.append(
+                    URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        /*List<String> stocksSymbols = Arrays.asList(symbol);
         if (stocksSymbols.size() != 0) {
             for (int i = 0; i < stocksSymbols.size() ; ++i) {
                 try {
@@ -41,26 +45,15 @@ public class UrlBuilder {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
 
 
-    }
-
-
-    /**
-     * This method add the response type to Request Url
-     */
-    public static void addResponseFormat() {
-        // finalize the URL for the API query.
-        urlBuilder.append("&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables."
-                + "org%2Falltableswithkeys&callback=");
     }
 
 
     public static String queryBuilder(String... symbols) {
         addYahooSelectQuotesQuery();
         addStockSymbol(symbols);
-        addResponseFormat();
         return urlBuilder.toString();
     }
 }

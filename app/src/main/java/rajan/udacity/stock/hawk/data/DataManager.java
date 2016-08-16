@@ -32,7 +32,7 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-        return mStocksService.getStockss(getYahooStocksQuery());
+        return mStocksService.getStocks(getYahooStocksQuery());
     }
 
     public String getYahooStocksQuery( ) {

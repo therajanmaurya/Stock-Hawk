@@ -19,12 +19,8 @@ public interface StocksService {
 
     String ENDPOINT = "https://query.yahooapis.com/v1/public/";
 
-    //TODO ADD query URL builder method
-    @GET("yql?q=select+*+from+yahoo.finance.quotes+where+symbol+in+%28%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22%2C%22ch%22%29&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=")
-    Observable<Stock> getStocks();
-
-    @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE)
-    Observable<Stock> getStockss(@Query("q") String s);
+    @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
+    Observable<Stock> getStocks(@Query(value="q", encoded=true) String q);
 
     /******** Helper class that sets up a new services *******/
     class Creator {
