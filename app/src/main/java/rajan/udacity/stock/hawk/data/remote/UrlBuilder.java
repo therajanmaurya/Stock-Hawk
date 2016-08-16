@@ -2,6 +2,8 @@ package rajan.udacity.stock.hawk.data.remote;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Rajan Maurya on 15/08/16.
@@ -18,7 +20,7 @@ public class UrlBuilder {
 
         StringBuilder baseUrlBuilder = new StringBuilder();
         // Base URL for the Yahoo query
-        baseUrlBuilder.append("https://query.yahooapis.com/v1/public/yql");
+        baseUrlBuilder.append("https://query.yahooapis.com/v1/public");
         return baseUrlBuilder;
     }
 
@@ -74,5 +76,30 @@ public class UrlBuilder {
                 + "org%2Falltableswithkeys&callback=");
 
         return responseFormatBuilder;
+    }
+
+
+    /**
+     * This Method is building the Yahoo Table Query
+     *
+     * @param symbols Stocks Symbols
+     * @return Yahoo Table Query
+     */
+    public String queryBuilder(String... symbols) {
+
+        List<String> stocksSymbols = Arrays.asList(symbols);
+        StringBuilder stringQueryBuilder = new StringBuilder();
+
+        stringQueryBuilder.append(yahooSelectQuotesQuery());
+
+        if (stocksSymbols.size() != 0) {
+            for (int i = 0; i < stocksSymbols.size() ; ++i) {
+                stringQueryBuilder.append(addStockSymbol(stocksSymbols.get(i)));
+            }
+        }
+
+        stringQueryBuilder.append(responseFormat());
+
+        return stringQueryBuilder.toString();
     }
 }

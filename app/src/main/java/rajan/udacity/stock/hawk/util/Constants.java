@@ -5,8 +5,6 @@ package rajan.udacity.stock.hawk.util;
  */
 public class Constants {
 
-    public static String YAHOO_QUERY = "yql";
-
     public static String YAHOO_STOCK_SYMBOL = "YHOO";
 
     public static String APPLE_STOCK_SYMBOL = "AAPL";

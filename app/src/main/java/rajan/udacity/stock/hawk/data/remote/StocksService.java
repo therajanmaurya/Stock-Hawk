@@ -6,11 +6,13 @@ import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import rajan.udacity.stock.hawk.BuildConfig;
+import rajan.udacity.stock.hawk.data.ApiEndPoint;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface StocksService {
@@ -20,6 +22,9 @@ public interface StocksService {
     //TODO ADD query URL builder method
     @GET("yql?q=select+*+from+yahoo.finance.quotes+where+symbol+in+%28%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22%2C%22ch%22%29&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=")
     Observable<Stock> getStocks();
+
+    @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE)
+    Observable<Stock> getStockss(@Query("q") String s);
 
     /******** Helper class that sets up a new services *******/
     class Creator {
