@@ -1,7 +1,5 @@
 package rajan.udacity.stock.hawk.data;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -9,6 +7,8 @@ import rajan.udacity.stock.hawk.data.local.DatabaseHelper;
 import rajan.udacity.stock.hawk.data.local.PreferencesHelper;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.data.remote.StocksService;
+import rajan.udacity.stock.hawk.data.remote.UrlBuilder;
+import rajan.udacity.stock.hawk.util.Constants;
 import rx.Observable;
 
 @Singleton
@@ -32,11 +32,14 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-        return mStocksService.getStocks();
+        return mStocksService.getStockss(getYahooStocksQuery());
     }
 
-    public Observable<List<Stock>> getStocks() {
-        return null;
+    public String getYahooStocksQuery( ) {
+        return UrlBuilder.queryBuilder(
+                Constants.YAHOO_STOCK_SYMBOL,
+                Constants.APPLE_STOCK_SYMBOL,
+                Constants.GOOGLE_STOCK_SYMBOL,
+                Constants.MICROSOFT_STOCK_SYMBOL);
     }
-
 }

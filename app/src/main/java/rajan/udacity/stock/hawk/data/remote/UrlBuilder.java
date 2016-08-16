@@ -10,96 +10,57 @@ import java.util.List;
  */
 public class UrlBuilder {
 
-
-    /**
-     * This Method Make the base Url of the Request for Retrofit 2
-     *
-     * @return StringBuilder of the BaseUrl
-     */
-    public static StringBuilder baseUrl() {
-
-        StringBuilder baseUrlBuilder = new StringBuilder();
-        // Base URL for the Yahoo query
-        baseUrlBuilder.append("https://query.yahooapis.com/v1/public");
-        return baseUrlBuilder;
-    }
-
+    public static StringBuilder urlBuilder = new StringBuilder();
 
     /**
      * This Method Add the Select Yahoo query to Request URl
-     *
-     * @return StringBuilder of the Yahoo Table Select Query
      */
-    public static StringBuilder yahooSelectQuotesQuery() {
+    public static void addYahooSelectQuotesQuery() {
 
-        StringBuilder queryBuilder = new StringBuilder();
         try {
-            queryBuilder.append(URLEncoder
-                    .encode("select * from yahoo.finance.quotes where symbol " + "in (", "UTF-8"));
+            urlBuilder.append(URLEncoder.encode("select * from yahoo.finance.quotes where symbol "
+                    + "in (", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-        return queryBuilder;
     }
 
     /**
      * This Method Add the Symbol to the Query
      *
      * @param symbol Symbol of the Stocks
-     * @return StringBuilder of Stock Symbol
      */
-    public StringBuilder addStockSymbol(String symbol) {
+    public static void addStockSymbol(String... symbol) {
 
-        StringBuilder stockSymbolBuilder = new StringBuilder();
-
-        try {
-            stockSymbolBuilder.append(URLEncoder.encode("\"" + symbol + "\")", "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        List<String> stocksSymbols = Arrays.asList(symbol);
+        if (stocksSymbols.size() != 0) {
+            for (int i = 0; i < stocksSymbols.size() ; ++i) {
+                try {
+                    urlBuilder.append(URLEncoder.encode("\""+stocksSymbols.get(i)+"\")", "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return stockSymbolBuilder;
+
     }
 
 
     /**
      * This method add the response type to Request Url
-     *
-     * @return StringBuilder
      */
-    public static StringBuilder responseFormat() {
-
-        StringBuilder responseFormatBuilder = new StringBuilder();
+    public static void addResponseFormat() {
         // finalize the URL for the API query.
-        responseFormatBuilder.append("&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables."
+        urlBuilder.append("&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables."
                 + "org%2Falltableswithkeys&callback=");
-
-        return responseFormatBuilder;
     }
 
 
-    /**
-     * This Method is building the Yahoo Table Query
-     *
-     * @param symbols Stocks Symbols
-     * @return Yahoo Table Query
-     */
-    public String queryBuilder(String... symbols) {
-
-        List<String> stocksSymbols = Arrays.asList(symbols);
-        StringBuilder stringQueryBuilder = new StringBuilder();
-
-        stringQueryBuilder.append(yahooSelectQuotesQuery());
-
-        if (stocksSymbols.size() != 0) {
-            for (int i = 0; i < stocksSymbols.size() ; ++i) {
-                stringQueryBuilder.append(addStockSymbol(stocksSymbols.get(i)));
-            }
-        }
-
-        stringQueryBuilder.append(responseFormat());
-
-        return stringQueryBuilder.toString();
+    public static String queryBuilder(String... symbols) {
+        addYahooSelectQuotesQuery();
+        addStockSymbol(symbols);
+        addResponseFormat();
+        return urlBuilder.toString();
     }
 }
