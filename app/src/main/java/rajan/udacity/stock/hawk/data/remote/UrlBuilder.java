@@ -2,25 +2,61 @@ package rajan.udacity.stock.hawk.data.remote;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Rajan Maurya on 15/08/16.
  */
 public class UrlBuilder {
 
-    StringBuilder urlStringBuilder = new StringBuilder();
+    public static StringBuilder urlBuilder = new StringBuilder();
 
+    /**
+     * This Method Add the Select Yahoo query to Request URl
+     */
+    public static void addYahooSelectQuotesQuery() {
 
-    public void addYahooBaseUrl() {
-        try{
-            // Base URL for the Yahoo query
-            urlStringBuilder.append("https://query.yahooapis.com/v1/public/yql?q=");
-            urlStringBuilder.append(URLEncoder
-                    .encode("select * from yahoo.finance.quotes where symbol " + "in (", "UTF-8"));
-            urlStringBuilder.append(
-                    URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));
+        try {
+            urlBuilder.append(URLEncoder.encode("select * from yahoo.finance.quotes where symbol "
+                    + "in (", "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This Method Add the Symbol to the Query
+     *
+     * @param symbol Symbol of the Stocks
+     */
+    public static void addStockSymbol(String... symbol) {
+        List<String> stocksSymbols = Arrays.asList(symbol);
+        if (stocksSymbols.size() != 0) {
+            for (int i = 0; i < stocksSymbols.size(); ++i) {
+                if (i - (stocksSymbols.size() - 1) == 0) {
+                    try {
+                        urlBuilder.append(URLEncoder.encode(stocksSymbols.get(i)+")", "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        urlBuilder.append(URLEncoder.encode(stocksSymbols.get(i) + ",", "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+    public static String queryBuilder(String... symbols) {
+        addYahooSelectQuotesQuery();
+        addStockSymbol(symbols);
+        return urlBuilder.toString();
     }
 }
