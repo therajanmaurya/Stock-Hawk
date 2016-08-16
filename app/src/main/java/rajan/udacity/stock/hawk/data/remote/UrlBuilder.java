@@ -26,7 +26,8 @@ public class UrlBuilder {
     }
 
     /**
-     * This Method Add the Symbol to the Query
+     * This Method Add the Symbol to the Query. This Method Takes the Array of Symbol and
+     * encode with URLEncoder.encode and adding to the Query.
      *
      * @param symbol Symbol of the Stocks
      */
@@ -53,7 +54,12 @@ public class UrlBuilder {
 
     }
 
-
+    /**
+     * This Method Building the Symbol Url Query
+     *
+     * @param symbols Stocks Symbol
+     * @return String Query
+     */
     public static String queryBuilder(String... symbols) {
         addYahooSelectQuotesQuery();
         addStockSymbol(symbols);
