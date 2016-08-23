@@ -38,7 +38,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     public void loadStocks() {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.syncStocks()
+        mSubscription = mDataManager.getStocks()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Stock>() {
