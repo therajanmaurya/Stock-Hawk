@@ -13,10 +13,15 @@ import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
 import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.touch_helper.ItemTouchHelperAdapter;
+import rajan.udacity.stock.hawk.touch_helper.ItemTouchHelperViewHolder;
 
-public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
+public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder>
+        implements ItemTouchHelperAdapter {
 
     private Stock mStocks;
+
+    private DismissStockListener mDismissStockListener;
 
     @Inject
     public StockAdapter() {
@@ -25,6 +30,11 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     public void setStocks(Stock stocks) {
         mStocks = stocks;
+    }
+
+    public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
+        mDismissStockListener = listener;
+        return this;
     }
 
     @Override
@@ -48,7 +58,14 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return mStocks.getQuery().getResult().getQuote().size();
     }
 
-    class StockViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onItemDismiss(int position) {
+        mDismissStockListener.onStockDismiss(mStocks.getQuery()
+                .getResult().getQuote().get(position).getMsymbol());
+        notifyItemRemoved(position);
+    }
+
+    class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
         @BindView(R.id.stock_symbol) TextView tv_stock_symbol;
         @BindView(R.id.bid_price) TextView tv_bid_price;
@@ -58,5 +75,19 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        @Override
+        public void onItemSelected() {
+            //itemView.setBackgroundColor(Color.LTGRAY);
+        }
+
+        @Override
+        public void onItemClear() {
+            //itemView.setBackgroundColor(0);
+        }
+    }
+
+    public interface DismissStockListener {
+        void onStockDismiss(String symbol);
     }
 }

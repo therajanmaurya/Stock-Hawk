@@ -46,6 +46,10 @@ public class DataManager {
         return mDatabaseHelper.getStocks();
     }
 
+    public Observable<Stock> deleteStock(String symbol) {
+        return mDatabaseHelper.deleteStock(symbol);
+    }
+
     public String getYahooStocksQuery( ) {
         return UrlBuilder.queryBuilder(
                 Constants.YAHOO_STOCK_SYMBOL,
