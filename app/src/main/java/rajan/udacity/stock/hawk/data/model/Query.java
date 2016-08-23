@@ -5,10 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import rajan.udacity.stock.hawk.data.local.StockBaseModel;
+
 /**
  * Created by Rajan Maurya on 07/08/16.
  */
-public class Query implements Parcelable {
+public class Query extends StockBaseModel implements Parcelable {
 
     @SerializedName("count")
     Integer mCount = 0;

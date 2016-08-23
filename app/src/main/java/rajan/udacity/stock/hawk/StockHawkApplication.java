@@ -1,6 +1,8 @@
 package rajan.udacity.stock.hawk;
 
 import com.crashlytics.android.Crashlytics;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import android.app.Application;
 import android.content.Context;
@@ -23,6 +25,8 @@ public class StockHawkApplication extends Application  {
             Timber.plant(new Timber.DebugTree());
             Fabric.with(this, new Crashlytics());
         }
+
+        FlowManager.init(new FlowConfig.Builder(this).build());
     }
 
     public static StockHawkApplication get(Context context) {

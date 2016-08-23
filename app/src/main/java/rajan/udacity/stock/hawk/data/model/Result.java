@@ -6,10 +6,13 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rajan.udacity.stock.hawk.data.local.StockBaseModel;
+
 /**
  * Created by Rajan Maurya on 07/08/16.
  */
-public class Result implements Parcelable {
+
+public class Result extends StockBaseModel implements Parcelable {
 
     List<Quote> quote = new ArrayList<>();
 
