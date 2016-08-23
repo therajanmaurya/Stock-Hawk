@@ -1,5 +1,6 @@
 package rajan.udacity.stock.hawk.data.local;
 
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rajan.udacity.stock.hawk.data.model.Quote;
+import rajan.udacity.stock.hawk.data.model.Quote_Table;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import rx.Observable;
 import rx.functions.Action1;
@@ -53,6 +55,19 @@ public class DatabaseHelper {
                 stock.getQuery().getResult().setQuote(quotes);
 
                 return Observable.just(stock);
+            }
+        });
+    }
+
+    public Observable<Boolean> deleteStock(final String symbol) {
+        return Observable.defer(new Func0<Observable<Boolean>>() {
+            @Override
+            public Observable<Boolean> call() {
+
+                Delete.table(Quote.class,
+                        Quote_Table.msymbol.eq(symbol));
+
+                return Observable.just(true);
             }
         });
     }

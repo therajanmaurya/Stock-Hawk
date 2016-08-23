@@ -6,22 +6,22 @@ import rajan.udacity.stock.hawk.data.DataManager;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
-import rajan.udacity.stock.hawk.util.RxUtil;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {
 
     private final DataManager mDataManager;
-    private Subscription mSubscription;
+    private CompositeSubscription mSubscriptions;
 
     @Inject
     public MainPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -32,13 +32,12 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        mSubscriptions.unsubscribe();
     }
 
     public void loadStocks() {
         checkViewAttached();
-        RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getStocks()
+        mSubscriptions.add(mDataManager.getStocks()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Stock>() {
@@ -60,7 +59,31 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                             getMvpView().showStocks(stocks);
                         }
                     }
-                });
+                }));
     }
 
+    public void deleteStock(String symbol) {
+        checkViewAttached();
+        mSubscriptions.add(mDataManager.deleteStock(symbol)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e(e, "There was an error deleting the stock");
+                        getMvpView().showError();
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+
+                    }
+                })
+        );
+    }
 }

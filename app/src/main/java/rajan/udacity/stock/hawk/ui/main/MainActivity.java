@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -14,10 +15,11 @@ import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
 import rajan.udacity.stock.hawk.data.SyncService;
 import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.touch_helper.SimpleItemTouchHelperCallback;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
 import rajan.udacity.stock.hawk.util.DialogFactory;
 
-public class MainActivity extends BaseActivity implements MainMvpView {
+public class MainActivity extends BaseActivity implements MainMvpView, StockAdapter.DismissStockListener {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "rajan.udacity.stock.hawk.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
@@ -51,12 +53,23 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
         mRecyclerView.setAdapter(mStocksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mStocksAdapter.setOnDismissStockListener(this);
         mMainPresenter.attachView(this);
         mMainPresenter.loadStocks();
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mStocksAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));
         }
+    }
+
+    @Override
+    public void onStockDismiss(String symbol) {
+        Toast.makeText(this, "Dismiss" ,  Toast.LENGTH_SHORT).show();
+        mMainPresenter.deleteStock(symbol);
     }
 
     @Override
@@ -86,5 +99,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         mStocksAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_stocks, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void showStockDeletedSuccessfully(Boolean aBoolean) {
+        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+    }
+
 
 }
