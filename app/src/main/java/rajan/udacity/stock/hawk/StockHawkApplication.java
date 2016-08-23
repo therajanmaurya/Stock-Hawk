@@ -1,6 +1,7 @@
 package rajan.udacity.stock.hawk;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -27,6 +28,7 @@ public class StockHawkApplication extends Application  {
         }
 
         FlowManager.init(new FlowConfig.Builder(this).build());
+        Stetho.initializeWithDefaults(this);
     }
 
     public static StockHawkApplication get(Context context) {
