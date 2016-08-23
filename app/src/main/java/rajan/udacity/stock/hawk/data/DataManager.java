@@ -10,6 +10,7 @@ import rajan.udacity.stock.hawk.data.remote.StocksService;
 import rajan.udacity.stock.hawk.data.remote.UrlBuilder;
 import rajan.udacity.stock.hawk.util.Constants;
 import rx.Observable;
+import rx.functions.Func1;
 
 @Singleton
 public class DataManager {
@@ -32,7 +33,17 @@ public class DataManager {
     }
 
     public Observable<Stock> syncStocks() {
-        return mStocksService.getStocks(getYahooStocksQuery());
+        return mStocksService.getStocks(getYahooStocksQuery())
+                .concatMap(new Func1<Stock, Observable<? extends Stock>>() {
+                    @Override
+                    public Observable<? extends Stock> call(Stock stock) {
+                        return mDatabaseHelper.setStocks(stock);
+                    }
+                });
+    }
+
+    public Observable<Stock> getStocks() {
+        return mDatabaseHelper.getStocks();
     }
 
     public String getYahooStocksQuery( ) {

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by Rajan Maurya on 07/08/16.
  */
+
 public class Result implements Parcelable {
 
     List<Quote> quote = new ArrayList<>();

@@ -2,15 +2,27 @@ package rajan.udacity.stock.hawk.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import rajan.udacity.stock.hawk.data.local.StockBaseModel;
+import rajan.udacity.stock.hawk.data.local.StockDatabase;
 
 /**
  * Created by Rajan Maurya on 07/08/16.
  */
-public class Quote implements Parcelable {
+@Table(database = StockDatabase.class)
+@ModelContainer
+public class Quote extends StockBaseModel implements Parcelable {
 
     @SerializedName("symbol")
+    @PrimaryKey
+    @Column
     String msymbol;
 
     @SerializedName("Ask")
@@ -20,6 +32,7 @@ public class Quote implements Parcelable {
     Double mAverageDailyVolume;
 
     @SerializedName("Bid")
+    @Column
     Double mBid;
 
     @SerializedName("BookValue")
@@ -29,6 +42,7 @@ public class Quote implements Parcelable {
     String mChangePercentChange;
 
     @SerializedName("Change")
+    @Column
     Double mChange;
 
     @SerializedName("Currency")
@@ -116,6 +130,7 @@ public class Quote implements Parcelable {
     Double mPreviousClose;
 
     @SerializedName("ChangeinPercent")
+    @Column
     String mChangeinPercent;
 
     @SerializedName("PriceSales")
