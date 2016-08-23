@@ -10,9 +10,13 @@ import android.os.IBinder;
 import javax.inject.Inject;
 
 import rajan.udacity.stock.hawk.StockHawkApplication;
+import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.util.AndroidComponentUtil;
 import rajan.udacity.stock.hawk.util.NetworkUtil;
+import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class SyncService extends Service {
@@ -48,6 +52,26 @@ public class SyncService extends Service {
         }
 
         if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
+        mSubscription = mDataManager.syncStocks()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Stock>() {
+                    @Override
+                    public void onCompleted() {
+                        Timber.i("Synced successfully!");
+                        stopSelf(startId);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.w(e, "Error syncing.");
+                        stopSelf(startId);
+                    }
+
+                    @Override
+                    public void onNext(Stock stocks) {
+                    }
+                });
 
         return START_STICKY;
     }
