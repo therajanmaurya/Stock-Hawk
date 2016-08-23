@@ -46,7 +46,7 @@ public class DataManager {
         return mDatabaseHelper.getStocks();
     }
 
-    public Observable<Boolean> deleteStock(String symbol) {
+    public Observable<Stock> deleteStock(String symbol) {
         return mDatabaseHelper.deleteStock(symbol);
     }
 

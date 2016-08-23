@@ -53,11 +53,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onNext(Stock stocks) {
-                        if (stocks == null) {
-                            getMvpView().showStocksEmpty();
-                        } else {
-                            getMvpView().showStocks(stocks);
-                        }
+                        showStocks(stocks);
                     }
                 }));
     }
@@ -67,7 +63,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         mSubscriptions.add(mDataManager.deleteStock(symbol)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Boolean>() {
+                .subscribe(new Subscriber<Stock>() {
                     @Override
                     public void onCompleted() {
 
@@ -80,10 +76,18 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     }
 
                     @Override
-                    public void onNext(Boolean aBoolean) {
-
+                    public void onNext(Stock stock) {
+                        showStocks(stock);
                     }
                 })
         );
+    }
+
+    public void showStocks(Stock stocks) {
+        if (stocks == null) {
+            getMvpView().showStocksEmpty();
+        } else {
+            getMvpView().showStocks(stocks);
+        }
     }
 }

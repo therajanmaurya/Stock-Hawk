@@ -59,15 +59,15 @@ public class DatabaseHelper {
         });
     }
 
-    public Observable<Boolean> deleteStock(final String symbol) {
-        return Observable.defer(new Func0<Observable<Boolean>>() {
+    public Observable<Stock> deleteStock(final String symbol) {
+        return Observable.defer(new Func0<Observable<Stock>>() {
             @Override
-            public Observable<Boolean> call() {
+            public Observable<Stock> call() {
 
                 Delete.table(Quote.class,
                         Quote_Table.msymbol.eq(symbol));
 
-                return Observable.just(true);
+                return getStocks();
             }
         });
     }

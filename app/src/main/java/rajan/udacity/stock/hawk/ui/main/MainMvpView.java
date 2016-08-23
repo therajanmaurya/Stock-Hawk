@@ -9,8 +9,6 @@ public interface MainMvpView extends MvpView {
 
     void showStocksEmpty();
 
-    void showStockDeletedSuccessfully(Boolean aBoolean);
-
     void showError();
 
 }

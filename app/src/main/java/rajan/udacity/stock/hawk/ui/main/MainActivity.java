@@ -68,14 +68,12 @@ public class MainActivity extends BaseActivity implements MainMvpView, StockAdap
 
     @Override
     public void onStockDismiss(String symbol) {
-        Toast.makeText(this, "Dismiss" ,  Toast.LENGTH_SHORT).show();
         mMainPresenter.deleteStock(symbol);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         mMainPresenter.detachView();
     }
 
@@ -99,11 +97,4 @@ public class MainActivity extends BaseActivity implements MainMvpView, StockAdap
         mStocksAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_stocks, Toast.LENGTH_LONG).show();
     }
-
-    @Override
-    public void showStockDeletedSuccessfully(Boolean aBoolean) {
-        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
-    }
-
-
 }
