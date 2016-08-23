@@ -1,6 +1,5 @@
 package rajan.udacity.stock.hawk.ui.main;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,12 +78,12 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         @Override
         public void onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY);
+            //itemView.setBackgroundColor(Color.LTGRAY);
         }
 
         @Override
         public void onItemClear() {
-            itemView.setBackgroundColor(0);
+            //itemView.setBackgroundColor(0);
         }
     }
 
