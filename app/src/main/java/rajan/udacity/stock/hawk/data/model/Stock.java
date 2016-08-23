@@ -5,9 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import rajan.udacity.stock.hawk.data.local.StockBaseModel;
-
-public class Stock extends StockBaseModel implements Parcelable {
+public class Stock implements Parcelable {
 
     @SerializedName("query")
     Query mQuery = new Query();
