@@ -7,6 +7,7 @@ import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
+import rajan.udacity.stock.hawk.util.Utils;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -87,6 +88,30 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     }
                 })
         );
+    }
+
+    public void loadStock(String symbol) {
+        checkViewAttached();
+        mSubscriptions.add(mDataManager.syncStocks(Utils.getSingleStockQuery(symbol))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Stock>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e(e, "Failed to load single stock");
+                    }
+
+                    @Override
+                    public void onNext(Stock stock) {
+                        Timber.d(stock.toString(), "Failed to load single stock");
+                    }
+                }));
+
     }
 
     public void showStocks(Stock stocks) {
