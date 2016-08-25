@@ -61,6 +61,7 @@ public class UrlBuilder {
      * @return String Query
      */
     public static String queryBuilder(String... symbols) {
+        urlBuilder.setLength(0);
         addYahooSelectQuotesQuery();
         addStockSymbol(symbols);
         return urlBuilder.toString();

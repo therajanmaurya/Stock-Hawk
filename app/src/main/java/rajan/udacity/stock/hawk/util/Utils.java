@@ -1,5 +1,7 @@
 package rajan.udacity.stock.hawk.util;
 
+import java.util.Locale;
+
 import rajan.udacity.stock.hawk.data.remote.UrlBuilder;
 
 /**
@@ -16,6 +18,7 @@ public class Utils {
     }
 
     public static String getSingleStockQuery(String query) {
-        return UrlBuilder.queryBuilder(query);
+        String symbol = String.format(Locale.ENGLISH, "\"%s\"", query);
+        return UrlBuilder.queryBuilder("\"GOOG\"");
     }
 }

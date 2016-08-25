@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity implements
                                         mStocksAdapter.getStocks())) {
                                     showStockAlreadyExist();
                                 } else {
-
+                                    mMainPresenter.loadStock(input.toString());
                                 }
                             }
                         })
