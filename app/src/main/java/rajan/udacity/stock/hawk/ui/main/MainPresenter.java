@@ -111,7 +111,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onNext(Stock stock) {
-                        Timber.d(stock.toString(), "Failed to load single stock");
+                        showStock(stock.getQuery().getResult().getQuote());
                     }
                 }));
 
@@ -122,6 +122,14 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
             getMvpView().showStocksEmpty();
         } else {
             getMvpView().showStocks(stocks.getQuery().getResult().getQuote());
+        }
+    }
+
+    public void showStock(Quote quote) {
+        if (quote.getAsk() == null) {
+            getMvpView().showStockDoesNotExist();
+        } else {
+            getMvpView().showStock(quote);
         }
     }
 

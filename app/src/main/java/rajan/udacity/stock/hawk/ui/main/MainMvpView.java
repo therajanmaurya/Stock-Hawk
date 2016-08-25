@@ -11,6 +11,10 @@ public interface MainMvpView extends MvpView {
 
     void showStocksEmpty();
 
+    void showStock(Quote quote);
+
+    void showStockDoesNotExist();
+
     void showMaterialDialogAddStock();
 
     Boolean checkSymbolExistOrNot(String symbol, List<Quote> quoteList);

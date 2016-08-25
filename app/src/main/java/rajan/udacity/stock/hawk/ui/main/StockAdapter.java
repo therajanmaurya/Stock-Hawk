@@ -61,6 +61,11 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         mQuoteList = quotes;
     }
 
+    public void setStock(Quote quote) {
+        mQuoteList.add(quote);
+        notifyDataSetChanged();
+    }
+
     public List<Quote> getStocks() {
         return mQuoteList;
     }

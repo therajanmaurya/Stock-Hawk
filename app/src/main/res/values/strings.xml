@@ -16,4 +16,5 @@
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
     <string name="stocks_already_exist">This stock is already saved!</string>
+    <string name="stock_does_not_exist">Stock does not exist.</string>
 </resources>

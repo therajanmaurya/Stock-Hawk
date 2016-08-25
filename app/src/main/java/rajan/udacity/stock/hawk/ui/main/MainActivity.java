@@ -124,6 +124,19 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
+    public void showStock(Quote quote) {
+        mStocksAdapter.setStock(quote);
+    }
+
+    @Override
+    public void showStockDoesNotExist() {
+        Toast toast = Toast.makeText(this, getResources().getString(R.string.stock_does_not_exist),
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
+        toast.show();
+    }
+
+    @Override
     public void showMaterialDialogAddStock() {
         new MaterialDialog.Builder(this).title(R.string.symbol_search)
                 .content(R.string.content_test)
@@ -141,7 +154,7 @@ public class MainActivity extends BaseActivity implements
                                 if (checkSymbolExistOrNot(input.toString(),
                                         mStocksAdapter.getStocks())) {
                                     showStockAlreadyExist();
-                                } else {
+                                } else if (!input.toString().isEmpty()){
                                     mMainPresenter.loadStock(input.toString());
                                 }
                             }
