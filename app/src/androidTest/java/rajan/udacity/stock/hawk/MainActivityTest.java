@@ -14,7 +14,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import java.util.List;
 
-import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
 import rajan.udacity.stock.hawk.test.common.TestComponentRule;
 import rajan.udacity.stock.hawk.test.common.TestDataFactory;
 import rajan.udacity.stock.hawk.ui.main.MainActivity;
@@ -49,14 +49,14 @@ public class MainActivityTest {
 
     @Test
     public void listOfStocksShows() {
-        List<Stock> testDataStocks = TestDataFactory.makeListRibots(20);
+        List<Stocks> testDataStocks = TestDataFactory.makeListRibots(20);
        /* when(component.getMockDataManager().getRibots())
                 .thenReturn(Observable.just(testDataRibots));*/
 
         main.launchActivity(null);
 
         int position = 0;
-        for (Stock stock : testDataStocks) {
+        for (Stocks stock : testDataStocks) {
             onView(withId(R.id.recycler_view))
                     .perform(RecyclerViewActions.scrollToPosition(position));
             String name = String.format("%s %s", stock.profile().name().first(),

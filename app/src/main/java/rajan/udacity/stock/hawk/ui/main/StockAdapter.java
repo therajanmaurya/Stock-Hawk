@@ -6,26 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
 import rajan.udacity.stock.hawk.data.model.Quote;
-import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.touch_helper.ItemTouchHelperAdapter;
 import rajan.udacity.stock.hawk.touch_helper.ItemTouchHelperViewHolder;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder>
         implements ItemTouchHelperAdapter {
 
-    private Stock mStocks;
+    private List<Quote> mQuoteList;
 
     private DismissStockListener mDismissStockListener;
 
     @Inject
     public StockAdapter() {
-        mStocks = new Stock();
+        mQuoteList = new ArrayList<>();
     }
 
     @Override
@@ -37,7 +39,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
-        Quote quote = mStocks.getQuery().getResult().getQuote().get(position);
+        Quote quote = mQuoteList.get(position);
 
         holder.tv_stock_symbol.setText(quote.getMsymbol());
         holder.tv_bid_price.setText(String.valueOf(quote.getBid()));
@@ -46,22 +48,21 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public int getItemCount() {
-        return mStocks.getQuery().getResult().getQuote().size();
+        return mQuoteList.size();
     }
 
     @Override
     public void onItemDismiss(int position) {
-        mDismissStockListener.onStockDismiss(mStocks.getQuery()
-                .getResult().getQuote().get(position).getMsymbol());
+        mDismissStockListener.onStockDismiss(mQuoteList.get(position).getMsymbol());
         notifyItemRemoved(position);
     }
 
-    public void setStocks(Stock stocks) {
-        mStocks = stocks;
+    public void setStocks(List<Quote> quotes) {
+        mQuoteList = quotes;
     }
 
-    public Stock getStocks() {
-        return mStocks;
+    public List<Quote> getStocks() {
+        return mQuoteList;
     }
 
     public StockAdapter setOnDismissStockListener(DismissStockListener listener) {

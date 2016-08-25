@@ -740,7 +740,7 @@ public class Quote extends StockBaseModel implements Parcelable {
         this.mPercentChange = in.readString();
     }
 
-    public static final Parcelable.Creator<Quote> CREATOR = new Parcelable.Creator<Quote>() {
+    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
         @Override
         public Quote createFromParcel(Parcel source) {
             return new Quote(source);

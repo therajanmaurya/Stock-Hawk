@@ -14,6 +14,9 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -21,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rajan.udacity.stock.hawk.R;
 import rajan.udacity.stock.hawk.data.SyncService;
-import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.touch_helper.SimpleItemTouchHelperCallback;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
 import rajan.udacity.stock.hawk.util.DialogFactory;
@@ -101,7 +104,7 @@ public class MainActivity extends BaseActivity implements
     /***** MVP View methods implementation *****/
 
     @Override
-    public void showStocks(Stock stocks) {
+    public void showStocks(List<Quote> stocks) {
         mStocksAdapter.setStocks(stocks);
         mStocksAdapter.notifyDataSetChanged();
     }
@@ -114,7 +117,8 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showStocksEmpty() {
-        mStocksAdapter.setStocks(new Stock());
+        List<Quote> quotes = new ArrayList<>();
+        mStocksAdapter.setStocks(quotes);
         mStocksAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_stocks, Toast.LENGTH_LONG).show();
     }
@@ -146,7 +150,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
-    public Boolean checkSymbolExistOrNot(String symbol, Stock stock) {
+    public Boolean checkSymbolExistOrNot(String symbol, List<Quote> stock) {
         return mMainPresenter.checkStocksExistOrNot(symbol, stock);
     }
 

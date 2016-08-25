@@ -1,10 +1,13 @@
 package rajan.udacity.stock.hawk.ui.main;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rajan.udacity.stock.hawk.data.DataManager;
 import rajan.udacity.stock.hawk.data.model.Quote;
-import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
+import rajan.udacity.stock.hawk.data.model.single.Stock;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
 import rajan.udacity.stock.hawk.util.Utils;
@@ -47,7 +50,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         mSubscriptions.add(mDataManager.getStocks()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Stock>() {
+                .subscribe(new Subscriber<Stocks>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -59,7 +62,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     }
 
                     @Override
-                    public void onNext(Stock stocks) {
+                    public void onNext(Stocks stocks) {
                         showStocks(stocks);
                     }
                 }));
@@ -70,7 +73,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         mSubscriptions.add(mDataManager.deleteStock(symbol)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Stock>() {
+                .subscribe(new Subscriber<Stocks>() {
                     @Override
                     public void onCompleted() {
 
@@ -83,7 +86,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     }
 
                     @Override
-                    public void onNext(Stock stock) {
+                    public void onNext(Stocks stock) {
                         showStocks(stock);
                     }
                 })
@@ -92,7 +95,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     public void loadStock(String symbol) {
         checkViewAttached();
-        mSubscriptions.add(mDataManager.syncStocks(Utils.getSingleStockQuery(symbol))
+        mSubscriptions.add(mDataManager.syncStock(Utils.getSingleStockQuery(symbol))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Stock>() {
@@ -114,17 +117,17 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     }
 
-    public void showStocks(Stock stocks) {
+    public void showStocks(Stocks stocks) {
         if (stocks == null) {
             getMvpView().showStocksEmpty();
         } else {
-            getMvpView().showStocks(stocks);
+            getMvpView().showStocks(stocks.getQuery().getResult().getQuote());
         }
     }
 
-    public Boolean checkStocksExistOrNot(final String symbol, Stock stock) {
+    public Boolean checkStocksExistOrNot(final String symbol, List<Quote> quoteList) {
         stockExist = false;
-        Observable.from(stock.getQuery().getResult().getQuote())
+        Observable.from(quoteList)
                 .filter(new Func1<Quote, Boolean>() {
                     @Override
                     public Boolean call(Quote quote) {

@@ -35,7 +35,7 @@ public class MainPresenterTest {
 
     /*@Test
     public void loadRibotsReturnsRibots() {
-        List<Stock> ribots = TestDataFactory.makeListRibots(10);
+        List<Stocks> ribots = TestDataFactory.makeListRibots(10);
         when(mMockDataManager.getStocks())
                 .thenReturn(Observable.just(ribots));
 
@@ -48,23 +48,23 @@ public class MainPresenterTest {
     @Test
     public void loadRibotsReturnsEmptyList() {
         when(mMockDataManager.getStocks())
-                .thenReturn(Observable.just(Collections.<Stock>emptyList()));
+                .thenReturn(Observable.just(Collections.<Stocks>emptyList()));
 
         mMainPresenter.loadStocks();
         verify(mMockMainMvpView).showStocksEmpty();
-        verify(mMockMainMvpView, never()).showStocks(anyListOf(Stock.class));
+        verify(mMockMainMvpView, never()).showStocks(anyListOf(Stocks.class));
         verify(mMockMainMvpView, never()).showError();
     }
 
     @Test
     public void loadRibotsFails() {
         when(mMockDataManager.getStocks())
-                .thenReturn(Observable.<List<Stock>>error(new RuntimeException()));
+                .thenReturn(Observable.<List<Stocks>>error(new RuntimeException()));
 
         mMainPresenter.loadStocks();
         verify(mMockMainMvpView).showError();
         verify(mMockMainMvpView, never()).showStocksEmpty();
-        verify(mMockMainMvpView, never()).showStocks(anyListOf(Stock.class));
+        verify(mMockMainMvpView, never()).showStocks(anyListOf(Stocks.class));
     }*/
 
 }
