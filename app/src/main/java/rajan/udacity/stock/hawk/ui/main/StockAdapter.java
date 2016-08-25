@@ -28,19 +28,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         mStocks = new Stock();
     }
 
-    public void setStocks(Stock stocks) {
-        mStocks = stocks;
-    }
-
-    public Stock getStocks() {
-        return mStocks;
-    }
-
-    public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
-        mDismissStockListener = listener;
-        return this;
-    }
-
     @Override
     public StockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -68,6 +55,20 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 .getResult().getQuote().get(position).getMsymbol());
         notifyItemRemoved(position);
     }
+
+    public void setStocks(Stock stocks) {
+        mStocks = stocks;
+    }
+
+    public Stock getStocks() {
+        return mStocks;
+    }
+
+    public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
+        mDismissStockListener = listener;
+        return this;
+    }
+
 
     class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
