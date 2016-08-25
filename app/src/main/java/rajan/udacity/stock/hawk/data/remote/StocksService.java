@@ -7,7 +7,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import rajan.udacity.stock.hawk.BuildConfig;
 import rajan.udacity.stock.hawk.data.ApiEndPoint;
-import rajan.udacity.stock.hawk.data.model.Stock;
+import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
+import rajan.udacity.stock.hawk.data.model.single.Stock;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,7 +21,10 @@ public interface StocksService {
     String ENDPOINT = "https://query.yahooapis.com/v1/public/";
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
-    Observable<Stock> getStocks(@Query(value="q", encoded=true) String q);
+    Observable<Stocks> getStocks(@Query(value="q", encoded=true) String q);
+
+    @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
+    Observable<Stock> getStock(@Query(value="q", encoded=true) String q);
 
     /******** Helper class that sets up a new services *******/
     class Creator {

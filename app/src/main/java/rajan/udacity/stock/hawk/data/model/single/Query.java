@@ -1,4 +1,4 @@
-package rajan.udacity.stock.hawk.data.model;
+package rajan.udacity.stock.hawk.data.model.single;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -88,7 +88,7 @@ public class Query implements Parcelable {
         this.mResult = in.readParcelable(Result.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Query> CREATOR = new Parcelable.Creator<Query>() {
+    public static final Creator<Query> CREATOR = new Creator<Query>() {
         @Override
         public Query createFromParcel(Parcel source) {
             return new Query(source);

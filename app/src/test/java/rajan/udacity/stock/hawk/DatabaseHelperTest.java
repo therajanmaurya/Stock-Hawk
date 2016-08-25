@@ -23,11 +23,11 @@ public class DatabaseHelperTest {
 
    /* @Test
     public void setStocks() {
-        Stock ribot1 = TestDataFactory.makeRibot("r1");
-        Stock ribot2 = TestDataFactory.makeRibot("r2");
-        List<Stock> ribots = Arrays.asList(ribot1, ribot2);
+        Stocks ribot1 = TestDataFactory.makeRibot("r1");
+        Stocks ribot2 = TestDataFactory.makeRibot("r2");
+        List<Stocks> ribots = Arrays.asList(ribot1, ribot2);
 
-        TestSubscriber<Stock> result = new TestSubscriber<>();
+        TestSubscriber<Stocks> result = new TestSubscriber<>();
         mDatabaseHelper.setStocks(ribots).subscribe(result);
         result.assertNoErrors();
         result.assertReceivedOnNext(ribots);
@@ -35,7 +35,7 @@ public class DatabaseHelperTest {
         Cursor cursor = mDatabaseHelper.getBriteDb()
                 .query("SELECT * FROM " + Db.RibotProfileTable.TABLE_NAME);
         assertEquals(2, cursor.getCount());
-        for (Stock ribot : ribots) {
+        for (Stocks ribot : ribots) {
             cursor.moveToNext();
             assertEquals(ribot.profile(), Db.RibotProfileTable.parseCursor(cursor));
         }
@@ -43,13 +43,13 @@ public class DatabaseHelperTest {
 
     @Test
     public void getStocks() {
-        Stock ribot1 = TestDataFactory.makeRibot("r1");
-        Stock ribot2 = TestDataFactory.makeRibot("r2");
-        List<Stock> ribots = Arrays.asList(ribot1, ribot2);
+        Stocks ribot1 = TestDataFactory.makeRibot("r1");
+        Stocks ribot2 = TestDataFactory.makeRibot("r2");
+        List<Stocks> ribots = Arrays.asList(ribot1, ribot2);
 
         mDatabaseHelper.setStocks(ribots).subscribe();
 
-        TestSubscriber<List<Stock>> result = new TestSubscriber<>();
+        TestSubscriber<List<Stocks>> result = new TestSubscriber<>();
         mDatabaseHelper.getStocks().subscribe(result);
         result.assertNoErrors();
         result.assertValue(ribots);

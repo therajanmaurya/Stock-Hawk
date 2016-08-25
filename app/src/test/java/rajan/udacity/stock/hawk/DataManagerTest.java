@@ -35,11 +35,11 @@ public class DataManagerTest {
 
     /*@Test
     public void syncRibotsEmitsValues() {
-        List<Stock> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
+        List<Stocks> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
                 TestDataFactory.makeRibot("r2"));
         stubSyncRibotsHelperCalls(ribots);
 
-        TestSubscriber<Stock> result = new TestSubscriber<>();
+        TestSubscriber<Stocks> result = new TestSubscriber<>();
         mDataManager.syncRibots().subscribe(result);
         result.assertNoErrors();
         result.assertReceivedOnNext(ribots);
@@ -47,7 +47,7 @@ public class DataManagerTest {
 
     @Test
     public void syncRibotsCallsApiAndDatabase() {
-        List<Stock> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
+        List<Stocks> ribots = Arrays.asList(TestDataFactory.makeRibot("r1"),
                 TestDataFactory.makeRibot("r2"));
         stubSyncRibotsHelperCalls(ribots);
 
@@ -60,15 +60,15 @@ public class DataManagerTest {
     @Test
     public void syncRibotsDoesNotCallDatabaseWhenApiFails() {
         when(mMockRibotsService.getStocks())
-                .thenReturn(Observable.<List<Stock>>error(new RuntimeException()));
+                .thenReturn(Observable.<List<Stocks>>error(new RuntimeException()));
 
-        mDataManager.syncRibots().subscribe(new TestSubscriber<Stock>());
+        mDataManager.syncRibots().subscribe(new TestSubscriber<Stocks>());
         // Verify right calls to helper methods
         verify(mMockRibotsService).getStocks();
-        verify(mMockDatabaseHelper, never()).setStocks(anyListOf(Stock.class));
+        verify(mMockDatabaseHelper, never()).setStocks(anyListOf(Stocks.class));
     }
 
-    private void stubSyncRibotsHelperCalls(List<Stock> ribots) {
+    private void stubSyncRibotsHelperCalls(List<Stocks> ribots) {
         // Stub calls to the ribot service and database helper.
         when(mMockRibotsService.getStocks())
                 .thenReturn(Observable.just(ribots));

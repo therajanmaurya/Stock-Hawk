@@ -1,10 +1,11 @@
-package rajan.udacity.stock.hawk.data.model;
+package rajan.udacity.stock.hawk.data.model.single;
+
+import com.google.gson.annotations.SerializedName;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
+import rajan.udacity.stock.hawk.data.model.Quote;
 
 /**
  * Created by Rajan Maurya on 07/08/16.
@@ -12,13 +13,14 @@ import java.util.List;
 
 public class Result implements Parcelable {
 
-    List<Quote> quote = new ArrayList<>();
+    @SerializedName("quote")
+    Quote quote = new Quote();
 
-    public List<Quote> getQuote() {
+    public Quote getQuote() {
         return quote;
     }
 
-    public void setQuote(List<Quote> quote) {
+    public void setQuote(Quote quote) {
         this.quote = quote;
     }
 
@@ -29,7 +31,6 @@ public class Result implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -37,14 +38,14 @@ public class Result implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.quote);
+        dest.writeParcelable(this.quote, flags);
     }
 
     public Result() {
     }
 
     protected Result(Parcel in) {
-        this.quote = in.createTypedArrayList(Quote.CREATOR);
+        this.quote = in.readParcelable(Quote.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
