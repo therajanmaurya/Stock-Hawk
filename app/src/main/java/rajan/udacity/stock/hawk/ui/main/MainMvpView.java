@@ -9,6 +9,8 @@ public interface MainMvpView extends MvpView {
 
     void showStocksEmpty();
 
+    void showMaterialDialogAddStock();
+
     void showError();
 
 }
