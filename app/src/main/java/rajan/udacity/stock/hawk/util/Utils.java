@@ -18,7 +18,6 @@ public class Utils {
     }
 
     public static String getSingleStockQuery(String query) {
-        String symbol = String.format(Locale.ENGLISH, "\"%s\"", query);
-        return UrlBuilder.queryBuilder("\"GOOG\"");
+        return UrlBuilder.queryBuilder(String.format(Locale.ENGLISH, "\"%1$s\"", query));
     }
 }
