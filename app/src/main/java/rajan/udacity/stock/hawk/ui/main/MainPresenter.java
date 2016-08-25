@@ -98,6 +98,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     public Boolean checkStocksExistOrNot(final String symbol, Stock stock) {
+        stockExist = false;
         Observable.from(stock.getQuery().getResult().getQuote())
                 .filter(new Func1<Quote, Boolean>() {
                     @Override
