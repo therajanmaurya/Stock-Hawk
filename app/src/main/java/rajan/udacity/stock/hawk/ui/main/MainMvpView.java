@@ -11,6 +11,10 @@ public interface MainMvpView extends MvpView {
 
     void showMaterialDialogAddStock();
 
+    Boolean checkSymbolExistOrNot(String symbol, Stock stock);
+
+    void showStockAlreadyExist();
+
     void showError();
 
 }

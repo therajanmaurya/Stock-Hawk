@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -133,9 +134,27 @@ public class MainActivity extends BaseActivity implements
                             public void onInput(MaterialDialog dialog, CharSequence input) {
                                 // On FAB click, receive user input. Make sure the stock doesn't
                                 // already exist in the DB and proceed accordingly
+                                if (checkSymbolExistOrNot(input.toString(),
+                                        mStocksAdapter.getStocks())) {
+                                    showStockAlreadyExist();
+                                } else {
 
+                                }
                             }
                         })
                 .show();
+    }
+
+    @Override
+    public Boolean checkSymbolExistOrNot(String symbol, Stock stock) {
+        return mMainPresenter.checkStocksExistOrNot(symbol, stock);
+    }
+
+    @Override
+    public void showStockAlreadyExist() {
+        Toast toast = Toast.makeText(this, getResources().getString(R.string.stocks_already_exist),
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
+        toast.show();
     }
 }

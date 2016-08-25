@@ -3,11 +3,15 @@ package rajan.udacity.stock.hawk.ui.main;
 import javax.inject.Inject;
 
 import rajan.udacity.stock.hawk.data.DataManager;
+import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.data.model.Stock;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
@@ -17,6 +21,8 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     private final DataManager mDataManager;
     private CompositeSubscription mSubscriptions;
+
+    private Boolean stockExist = false;
 
     @Inject
     public MainPresenter(DataManager dataManager) {
@@ -89,5 +95,22 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         } else {
             getMvpView().showStocks(stocks);
         }
+    }
+
+    public Boolean checkStocksExistOrNot(final String symbol, Stock stock) {
+        Observable.from(stock.getQuery().getResult().getQuote())
+                .filter(new Func1<Quote, Boolean>() {
+                    @Override
+                    public Boolean call(Quote quote) {
+                        return (quote.getMsymbol().equals(symbol));
+                    }
+                })
+                .subscribe(new Action1<Quote>() {
+                    @Override
+                    public void call(Quote quote) {
+                        stockExist = true;
+                    }
+                });
+        return stockExist;
     }
 }

@@ -15,4 +15,5 @@
     <string name="action_change_units">Change Units</string>
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
+    <string name="stocks_already_exist">This stock is already saved!</string>
 </resources>

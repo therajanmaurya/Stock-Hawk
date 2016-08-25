@@ -32,6 +32,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         mStocks = stocks;
     }
 
+    public Stock getStocks() {
+        return mStocks;
+    }
+
     public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
         mDismissStockListener = listener;
         return this;
