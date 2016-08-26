@@ -46,7 +46,11 @@ public class DataManager {
                 .concatMap(new Func1<Stock, Observable<? extends Stock>>() {
                     @Override
                     public Observable<? extends Stock> call(Stock stock) {
-                        return mDatabaseHelper.setStock(stock);
+                        if (stock.getQuery().getResult().getQuote().getAsk() == null) {
+                            return Observable.just(stock);
+                        } else {
+                            return mDatabaseHelper.setStock(stock);
+                        }
                     }
                 });
     }
