@@ -58,4 +58,12 @@ public class DataManager {
     public Observable<Stocks> deleteStock(String symbol) {
         return mDatabaseHelper.deleteStock(symbol);
     }
+
+    public Observable<Boolean> getChangeInPercentInPref() {
+        return mPreferencesHelper.getChangeInPercent();
+    }
+
+    public Observable<Boolean> updateChangeInPercentInPref() {
+        return mPreferencesHelper.updateChangeInPercentInPref();
+    }
 }

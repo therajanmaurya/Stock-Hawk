@@ -21,6 +21,10 @@ public interface MainMvpView extends MvpView {
 
     void showStockAlreadyExist();
 
+    void showChangeInPercent(Boolean changeInPercent);
+
+    void updateChangeInPercent(Boolean changeInPercent);
+
     void showError();
 
 }

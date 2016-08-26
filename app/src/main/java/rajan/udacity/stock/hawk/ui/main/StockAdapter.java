@@ -25,6 +25,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     private DismissStockListener mDismissStockListener;
 
+    private Boolean changeInPercent = false;
+
     @Inject
     public StockAdapter() {
         mQuoteList = new ArrayList<>();
@@ -43,7 +45,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         holder.tv_stock_symbol.setText(quote.getMsymbol());
         holder.tv_bid_price.setText(String.valueOf(quote.getBid()));
-        holder.tv_change.setText(quote.getChangeinPercent());
+
+        if (changeInPercent) {
+            holder.tv_change.setText(quote.getChangeinPercent());
+        } else {
+            holder.tv_change.setText(String.valueOf(quote.getChange()));
+        }
+
     }
 
     @Override
@@ -75,6 +83,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return this;
     }
 
+    public void setChangeInPercent(Boolean changeInPercent) {
+        this.changeInPercent = changeInPercent;
+        notifyDataSetChanged();
+    }
 
     class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
