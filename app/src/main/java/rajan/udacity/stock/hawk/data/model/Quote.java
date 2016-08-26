@@ -43,7 +43,7 @@ public class Quote extends StockBaseModel implements Parcelable {
 
     @SerializedName("Change")
     @Column
-    Double mChange;
+    String mChange;
 
     @SerializedName("Currency")
     String mCurrency;
@@ -220,11 +220,11 @@ public class Quote extends StockBaseModel implements Parcelable {
         mChangePercentChange = changePercentChange;
     }
 
-    public Double getChange() {
+    public String getChange() {
         return mChange;
     }
 
-    public void setChange(Double change) {
+    public void setChange(String change) {
         mChange = change;
     }
 
@@ -693,7 +693,7 @@ public class Quote extends StockBaseModel implements Parcelable {
         this.mBid = (Double) in.readValue(Double.class.getClassLoader());
         this.mBookValue = (Double) in.readValue(Double.class.getClassLoader());
         this.mChangePercentChange = in.readString();
-        this.mChange = (Double) in.readValue(Double.class.getClassLoader());
+        this.mChange = (String) in.readValue(String.class.getClassLoader());
         this.mCurrency = in.readString();
         this.mLastTradeDate = in.readString();
         this.mEarningsShare = (Double) in.readValue(Double.class.getClassLoader());

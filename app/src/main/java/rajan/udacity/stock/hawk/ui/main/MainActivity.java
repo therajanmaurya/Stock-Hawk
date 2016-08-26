@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -78,6 +80,11 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mMainPresenter.loadChangeInPercent();
+    }
 
     @OnClick(R.id.fb_add_stock)
     void onClickAddStock() {
@@ -173,5 +180,35 @@ public class MainActivity extends BaseActivity implements
                 Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
         toast.show();
+    }
+
+    @Override
+    public void showChangeInPercent(Boolean changeInPercent) {
+        mStocksAdapter.setChangeInPercent(changeInPercent);
+    }
+
+    @Override
+    public void updateChangeInPercent(Boolean changeInPercent) {
+        mStocksAdapter.setChangeInPercent(changeInPercent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_change_units){
+            mMainPresenter.updateChangeInPercent();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
