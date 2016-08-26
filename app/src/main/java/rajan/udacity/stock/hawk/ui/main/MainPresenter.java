@@ -117,6 +117,34 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     }
 
+    public void loadChangeInPercent() {
+        checkViewAttached();
+        mSubscriptions.add(mDataManager.getChangeInPercentInPref()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        getMvpView().showChangeInPercent(aBoolean);
+                    }
+                })
+        );
+    }
+
+    public void updateChangeInPercent() {
+        checkViewAttached();
+        mSubscriptions.add(mDataManager.updateChangeInPercentInPref()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        getMvpView().updateChangeInPercent(aBoolean);
+                    }
+                })
+        );
+    }
+
     public void showStocks(Stocks stocks) {
         if (stocks == null) {
             getMvpView().showStocksEmpty();
