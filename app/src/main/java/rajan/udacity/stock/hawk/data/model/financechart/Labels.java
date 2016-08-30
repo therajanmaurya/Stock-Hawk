@@ -28,7 +28,6 @@ public class Labels implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
