@@ -1,20 +1,20 @@
 <resources>
-    <string name="app_name">Stock Hawk</string>
+    <string name="app_name" translatable="true">Stock Hawk</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings" translatable="true">Settings</string>
 
-    <string name="dialog_action_ok">OK</string>
-    <string name="dialog_action_cancel">Cancel</string>
-    <string name="dialog_error_title">Sorry</string>
+    <string name="dialog_action_ok" translatable="true">OK</string>
+    <string name="dialog_action_cancel" translatable="true">Cancel</string>
+    <string name="dialog_error_title" translatable="true">Sorry</string>
 
-    <string name="empty_stocks">There aren\'t any Stocks</string>
-    <string name="error_loading_stocks">There was a problem loading the stocks</string>
-    <string name="network_toast">Uh-oh! This app requires an internet connection</string>
-    <string name="input_hint">FB</string>
-    <string name="input_prefill"></string>
-    <string name="action_change_units">Change Units</string>
-    <string name="symbol_search">Symbol Search</string>
-    <string name="content_test">Search for a Stock Symbol</string>
-    <string name="stocks_already_exist">This stock is already saved!</string>
-    <string name="stock_does_not_exist">Stock does not exist.</string>
+    <string name="empty_stocks" translatable="true">There aren\'t any Stocks</string>
+    <string name="error_loading_stocks" translatable="true">There was a problem loading the stocks</string>
+    <string name="network_toast" translatable="true">Uh-oh! This app requires an internet connection</string>
+    <string name="input_hint" translatable="true">FB</string>
+    <string name="input_prefill" translatable="true"></string>
+    <string name="action_change_units" translatable="true">Change Units</string>
+    <string name="symbol_search" translatable="true">Symbol Search</string>
+    <string name="content_test" translatable="true">Search for a Stock Symbol</string>
+    <string name="stocks_already_exist" translatable="true">This stock is already saved!</string>
+    <string name="stock_does_not_exist" translatable="true">Stock does not exist.</string>
 </resources>
