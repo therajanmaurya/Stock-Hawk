@@ -7,24 +7,30 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import rajan.udacity.stock.hawk.BuildConfig;
 import rajan.udacity.stock.hawk.data.ApiEndPoint;
+import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartData;
 import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
 import rajan.udacity.stock.hawk.data.model.single.Stock;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
 public interface StocksService {
 
     String ENDPOINT = "https://query.yahooapis.com/v1/public/";
+    String FINANCE_CART_API_ENDPOINT = "http://http://chartapi.finance.yahoo.com/instrument/1.0/";
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
     Observable<Stocks> getStocks(@Query(value = "q", encoded = true) String q);
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
     Observable<Stock> getStock(@Query(value = "q", encoded = true) String q);
+
+    @GET(FINANCE_CART_API_ENDPOINT + "{symbol}/" + "chartdata;type=quote;range=5y/json" )
+    Observable<FinanceChartData> getFinanceChartData(@Path("symbol") String symbol);
 
     /******** Helper class that sets up a new services *******/
     class Creator {
