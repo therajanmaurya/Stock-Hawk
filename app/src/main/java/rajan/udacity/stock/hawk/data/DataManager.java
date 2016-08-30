@@ -64,10 +64,10 @@ public class DataManager {
     }
 
     public Observable<Boolean> getChangeInPercentInPref() {
-        return mPreferencesHelper.getChangeInPercent();
+        return getPreferencesHelper().getChangeInPercent();
     }
 
     public Observable<Boolean> updateChangeInPercentInPref() {
-        return mPreferencesHelper.updateChangeInPercentInPref();
+        return getPreferencesHelper().updateChangeInPercentInPref();
     }
 }
