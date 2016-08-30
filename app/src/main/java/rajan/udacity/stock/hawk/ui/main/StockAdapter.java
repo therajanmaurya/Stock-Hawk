@@ -74,6 +74,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return mQuoteList;
     }
 
+    public String getStockSymbol(int position) {
+        return mQuoteList.get(position).getMsymbol();
+    }
+
     public void setStocks(List<Quote> quotes) {
         mQuoteList = quotes;
     }

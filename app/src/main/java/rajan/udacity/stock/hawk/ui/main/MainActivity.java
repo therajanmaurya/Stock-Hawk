@@ -14,6 +14,7 @@ import android.text.InputType;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,11 +30,15 @@ import rajan.udacity.stock.hawk.data.SyncService;
 import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.touch_helper.SimpleItemTouchHelperCallback;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
+import rajan.udacity.stock.hawk.ui.base.RecyclerItemClickListner;
+import rajan.udacity.stock.hawk.ui.stockgraph.StockGraphActivity;
+import rajan.udacity.stock.hawk.util.Constants;
 import rajan.udacity.stock.hawk.util.DialogFactory;
 import rajan.udacity.stock.hawk.util.NetworkUtil;
 
 public class MainActivity extends BaseActivity implements
-        MainMvpView, StockAdapter.DismissStockListener {
+        MainMvpView, StockAdapter.DismissStockListener,
+        RecyclerItemClickListner.OnItemClickListener {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "rajan.udacity.stock.hawk.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
@@ -59,6 +64,18 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
+    public void onItemClick(View childView, int position) {
+        Intent intent = new Intent(this, StockGraphActivity.class);
+        intent.putExtra(Constants.SYMBOL, mStocksAdapter.getStockSymbol(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongPress(View childView, int position) {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
@@ -67,6 +84,7 @@ public class MainActivity extends BaseActivity implements
 
         mRecyclerView.setAdapter(mStocksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(this, this));
         mStocksAdapter.setOnDismissStockListener(this);
         mMainPresenter.attachView(this);
         mMainPresenter.loadStocks();

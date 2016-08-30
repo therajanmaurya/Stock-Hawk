@@ -2,17 +2,17 @@ package rajan.udacity.stock.hawk.ui.stockgraph;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import rajan.udacity.stock.hawk.R;
+import rajan.udacity.stock.hawk.ui.base.BaseActivity;
 import rajan.udacity.stock.hawk.util.ActivityUtils;
 import rajan.udacity.stock.hawk.util.Constants;
 
 /**
  * Created by Rajan Maurya on 30/08/16.
  */
-public class StockGraphActivity extends AppCompatActivity {
+public class StockGraphActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

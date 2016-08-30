@@ -21,7 +21,7 @@ import rx.Observable;
 public interface StocksService {
 
     String ENDPOINT = "https://query.yahooapis.com/v1/public/";
-    String FINANCE_CART_API_ENDPOINT = "http://http://chartapi.finance.yahoo.com/instrument/1.0/";
+    String FINANCE_CART_API_ENDPOINT = "https://chartapi.finance.yahoo.com/instrument/1.0/";
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
     Observable<Stocks> getStocks(@Query(value = "q", encoded = true) String q);
