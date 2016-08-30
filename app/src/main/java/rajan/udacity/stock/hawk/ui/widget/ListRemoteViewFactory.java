@@ -32,12 +32,14 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     private Context mContext;
     private int mAppWidgetId;
     private List<Quote> mQuoteList;
+    private final Object mObject;
 
     public ListRemoteViewFactory(Context applicationContext, Intent intent) {
         mContext = applicationContext;
         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
         mQuoteList = new ArrayList<>();
+        mObject = new Object();
     }
 
     @Override
@@ -49,6 +51,15 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void onDataSetChanged() {
         mListRemoteViewFactoryPresenter.loadStocks();
+        synchronized(mObject) {
+            try {
+                // Calling wait() will block this thread until another thread
+                // calls notify() on the object.
+                mObject.wait();
+            } catch (InterruptedException e) {
+                // Happens if someone interrupts your thread.
+            }
+        }
     }
 
     @Override
@@ -76,6 +87,9 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void showStocks(List<Quote> quoteList) {
         mQuoteList = quoteList;
+        synchronized(mObject) {
+            mObject.notify();
+        }
     }
 
     @Override

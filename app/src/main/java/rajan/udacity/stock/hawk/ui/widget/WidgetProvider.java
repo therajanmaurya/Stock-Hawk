@@ -14,6 +14,7 @@ import rajan.udacity.stock.hawk.R;
  */
 public class WidgetProvider extends AppWidgetProvider {
 
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         // Perform this loop procedure for each App Widget that belongs to this provider
@@ -31,7 +32,5 @@ public class WidgetProvider extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(appWidgetId, rv);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
-
     }
 }
