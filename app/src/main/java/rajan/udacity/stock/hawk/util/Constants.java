@@ -13,4 +13,6 @@ public class Constants {
 
     public static String MICROSOFT_STOCK_SYMBOL = "\"MSFT\"";
 
+    public static String CLICK_ACTION = "rajan.udacity.stock.hawk.quotelistwidget.CLICKQUOTE";
+
 }
