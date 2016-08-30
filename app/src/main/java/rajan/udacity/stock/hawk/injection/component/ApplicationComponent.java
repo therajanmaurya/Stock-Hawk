@@ -13,6 +13,7 @@ import rajan.udacity.stock.hawk.data.local.PreferencesHelper;
 import rajan.udacity.stock.hawk.data.remote.StocksService;
 import rajan.udacity.stock.hawk.injection.ApplicationContext;
 import rajan.udacity.stock.hawk.injection.module.ApplicationModule;
+import rajan.udacity.stock.hawk.ui.widget.ListRemoteViewFactory;
 import rajan.udacity.stock.hawk.util.RxEventBus;
 
 @Singleton
@@ -20,6 +21,8 @@ import rajan.udacity.stock.hawk.util.RxEventBus;
 public interface ApplicationComponent {
 
     void inject(SyncService syncService);
+
+    void inject(ListRemoteViewFactory listRemoteViewFactory);
 
     @ApplicationContext Context context();
     Application application();

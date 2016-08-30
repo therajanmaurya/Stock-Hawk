@@ -1,5 +1,7 @@
 package rajan.udacity.stock.hawk.ui.widget;
 
+import javax.inject.Inject;
+
 import rajan.udacity.stock.hawk.data.DataManager;
 import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
@@ -18,6 +20,7 @@ public class ListRemoteViewFactoryPresenter extends BasePresenter<ListRemoteView
     private final DataManager mDataManager;
     private Subscription mSubscription;
 
+    @Inject
     public ListRemoteViewFactoryPresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
@@ -57,7 +60,7 @@ public class ListRemoteViewFactoryPresenter extends BasePresenter<ListRemoteView
                 });
     }
 
-    public void showStocks(Stocks stocks) {
+    private void showStocks(Stocks stocks) {
         if (stocks == null) {
             getMvpView().showStocksEmpty();
         } else {

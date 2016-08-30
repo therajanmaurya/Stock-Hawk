@@ -3,7 +3,15 @@
     package="rajan.udacity.stock.hawk" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <permission
+            android:name="com.google.android.gcm.demo.permission.C2D_MESSAGE"
+            android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.google.android.gcm.demo.permission.C2D_MESSAGE" />
 
     <application
         android:name=".StockHawkApplication"
@@ -29,6 +37,19 @@
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
+        </receiver>
+
+        <service
+                android:name="rajan.udacity.stock.hawk.ui.widget.WidgetRemoteViewsService"
+                android:exported="false"
+                android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver android:name="rajan.udacity.stock.hawk.ui.widget.WidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/appwidget_info" />
         </receiver>
 
     </application>

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+import android.widget.Toast;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import rajan.udacity.stock.hawk.StockHawkApplication;
 import rajan.udacity.stock.hawk.data.model.Quote;
 
 /**
@@ -16,6 +20,8 @@ import rajan.udacity.stock.hawk.data.model.Quote;
 public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFactory,
         ListRemoteViewFactoryMvpView {
 
+    @Inject
+    ListRemoteViewFactoryPresenter mListRemoteViewFactoryPresenter;
 
     private Context mContext;
     private int mAppWidgetId;
@@ -27,8 +33,24 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     }
 
     @Override
-    public void onCreate() {
+    public void showStocks(List<Quote> quoteList) {
+        Toast.makeText(mContext, quoteList.toString() , Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showStocksEmpty() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void onCreate() {
+        StockHawkApplication.get(mContext).getComponent().inject(this);
+        mListRemoteViewFactoryPresenter.attachView(this);
     }
 
     @Override
@@ -38,16 +60,17 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDestroy() {
-
+        mListRemoteViewFactoryPresenter.detachView();
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 5;
     }
 
     @Override
     public RemoteViews getViewAt(int i) {
+        mListRemoteViewFactoryPresenter.loadStocks();
         return null;
     }
 
@@ -69,10 +92,5 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public boolean hasStableIds() {
         return false;
-    }
-
-    @Override
-    public void showStocks(List<Quote> quoteList) {
-
     }
 }
