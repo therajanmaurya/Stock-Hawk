@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import java.util.List;
+
+import rajan.udacity.stock.hawk.data.model.Quote;
+
 /**
  * Created by Rajan Maurya on 30/08/16.
  */
-public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFactory {
+public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFactory,
+        ListRemoteViewFactoryMvpView {
 
 
     private Context mContext;
@@ -64,5 +69,10 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public boolean hasStableIds() {
         return false;
+    }
+
+    @Override
+    public void showStocks(List<Quote> quoteList) {
+
     }
 }
