@@ -71,7 +71,7 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), itemId);
         rv.setTextViewText(R.id.stock_symbol, quote.getMsymbol());
         rv.setTextViewText(R.id.bid_price, String.valueOf(quote.getBid()));
-        rv.setTextViewText(R.id.change, quote.getChange());
+        rv.setTextViewText(R.id.change, quote.getChangeinPercent());
 
         final Intent viewIntent = new Intent();
         final Bundle extras = new Bundle();
