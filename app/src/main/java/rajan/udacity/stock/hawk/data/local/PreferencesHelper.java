@@ -26,16 +26,16 @@ public class PreferencesHelper {
         mPref.edit().clear().apply();
     }
 
-    public void setChangeInPercent(boolean changeInPercent) {
-        mPref.edit().putBoolean(PREF_CHANGE_IN_PERCENT, changeInPercent).apply();
-    }
-
     public Boolean getChangeInPercentFromPref() {
         return mPref.getBoolean(PREF_CHANGE_IN_PERCENT, true);
     }
 
     public Observable<Boolean> getChangeInPercent() {
         return Observable.just(mPref.getBoolean(PREF_CHANGE_IN_PERCENT, true));
+    }
+
+    public void setChangeInPercent(boolean changeInPercent) {
+        mPref.edit().putBoolean(PREF_CHANGE_IN_PERCENT, changeInPercent).apply();
     }
 
     public Observable<Boolean> updateChangeInPercentInPref() {

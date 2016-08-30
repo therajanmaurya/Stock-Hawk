@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity implements
                                 if (checkSymbolExistOrNot(input.toString(),
                                         mStocksAdapter.getStocks())) {
                                     showStockAlreadyExist();
-                                } else if (!input.toString().isEmpty()){
+                                } else if (!input.toString().isEmpty()) {
                                     mMainPresenter.loadStock(input.toString());
                                 }
                             }
@@ -205,7 +205,7 @@ public class MainActivity extends BaseActivity implements
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_change_units){
+        if (id == R.id.action_change_units) {
             mMainPresenter.updateChangeInPercent();
         }
 

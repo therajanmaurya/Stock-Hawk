@@ -20,157 +20,177 @@ import rajan.udacity.stock.hawk.data.local.StockDatabase;
 @ModelContainer
 public class Quote extends StockBaseModel implements Parcelable {
 
+    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
+        @Override
+        public Quote createFromParcel(Parcel source) {
+            return new Quote(source);
+        }
+
+        @Override
+        public Quote[] newArray(int size) {
+            return new Quote[size];
+        }
+    };
     @SerializedName("symbol")
     @PrimaryKey
     @Column
     String msymbol;
-
     @SerializedName("Ask")
     Double mAsk;
-
     @SerializedName("AverageDailyVolume")
     Double mAverageDailyVolume;
-
     @SerializedName("Bid")
     @Column
     Double mBid;
-
     @SerializedName("BookValue")
     Double mBookValue;
-
     @SerializedName("Change_PercentChange")
     String mChangePercentChange;
-
     @SerializedName("Change")
     @Column
     String mChange;
-
     @SerializedName("Currency")
     String mCurrency;
-
     @SerializedName("LastTradeDate")
     String mLastTradeDate;
-
     @SerializedName("EarningsShare")
     Double mEarningsShare;
-
     @SerializedName("EPSEstimateCurrentYear")
     String mEPSEstimateCurrentYear;
-
     @SerializedName("EPSEstimateNextYear")
     String mEPSEstimateNextYear;
-
     @SerializedName("EPSEstimateNextQuarter")
     String mEPSEstimateNextQuarter;
-
     @SerializedName("DaysLow")
     Double mDaysLow;
-
     @SerializedName("DaysHigh")
     Double DaysHigh;
-
     @SerializedName("YearLow")
     Double mYearLow;
-
     @SerializedName("YearHigh")
     Double mYearHigh;
-
     @SerializedName("MarketCapitalization")
     String mMarketCapitalization;
-
     @SerializedName("EBITDA")
     String mEBITDA;
-
     @SerializedName("ChangeFromYearLow")
     Double mChangeFromYearLow;
-
     @SerializedName("PercentChangeFromYearLow")
     String mPercentChangeFromYearLow;
-
     @SerializedName("ChangeFromYearHigh")
     Double mChangeFromYearHigh;
-
     @SerializedName("PercebtChangeFromYearHigh")
     String mPercebtChangeFromYearHigh;
-
     @SerializedName("LastTradeWithTime")
     String mLastTradeWithTime;
-
     @SerializedName("LastTradePriceOnly")
     Double mLastTradePriceOnly;
-
     @SerializedName("DaysRange")
     String mDaysRange;
-
     @SerializedName("FiftydayMovingAverage")
     Double mFiftydayMovingAverage;
-
     @SerializedName("TwoHundreddayMovingAverage")
     Double mTwoHundreddayMovingAverage;
-
     @SerializedName("ChangeFromTwoHundreddayMovingAverage")
     Double mChangeFromTwoHundreddayMovingAverage;
-
     @SerializedName("PercentChangeFromTwoHundreddayMovingAverage")
     String mPercentChangeFromTwoHundreddayMovingAverage;
-
     @SerializedName("ChangeFromFiftydayMovingAverage")
     Double mChangeFromFiftydayMovingAverage;
-
     @SerializedName("PercentChangeFromFiftydayMovingAverage")
     String mPercentChangeFromFiftydayMovingAverage;
-
     @SerializedName("Name")
     String mName;
-
     @SerializedName("Open")
     Double mOpen;
-
     @SerializedName("PreviousClose")
     Double mPreviousClose;
-
     @SerializedName("ChangeinPercent")
     @Column
     String mChangeinPercent;
-
     @SerializedName("PriceSales")
     Double mPriceSales;
-
     @SerializedName("PriceBook")
     Double mPriceBook;
-
     @SerializedName("PEGRatio")
     Double mPEGRatio;
-
     @SerializedName("PriceEPSEstimateCurrentYear")
     Double mPriceEPSEstimateCurrentYear;
-
     @SerializedName("PriceEPSEstimateNextYear")
     Double mPriceEPSEstimateNextYear;
-
     @SerializedName("Symbol")
     String mSymbol;
-
     @SerializedName("ShortRatio")
     Double mShortRatio;
-
     @SerializedName("LastTradeTime")
     String mLastTradeTime;
-
     @SerializedName("OneyrTargetPrice")
     Double mOneyrTargetPrice;
-
     @SerializedName("Volume")
     Double mVolume;
-
     @SerializedName("YearRange")
     String mYearRange;
-
     @SerializedName("StockExchange")
     String mStockExchange;
-
     @SerializedName("PercentChange")
     String mPercentChange;
+
+    public Quote() {
+    }
+
+    protected Quote(Parcel in) {
+        this.msymbol = in.readString();
+        this.mAsk = (Double) in.readValue(Double.class.getClassLoader());
+        this.mAverageDailyVolume = (Double) in.readValue(Double.class.getClassLoader());
+        this.mBid = (Double) in.readValue(Double.class.getClassLoader());
+        this.mBookValue = (Double) in.readValue(Double.class.getClassLoader());
+        this.mChangePercentChange = in.readString();
+        this.mChange = (String) in.readValue(String.class.getClassLoader());
+        this.mCurrency = in.readString();
+        this.mLastTradeDate = in.readString();
+        this.mEarningsShare = (Double) in.readValue(Double.class.getClassLoader());
+        this.mEPSEstimateCurrentYear = (String) in.readValue(String.class.getClassLoader());
+        this.mEPSEstimateNextYear = (String) in.readValue(String.class.getClassLoader());
+        this.mEPSEstimateNextQuarter = (String) in.readValue(String.class.getClassLoader());
+        this.mDaysLow = (Double) in.readValue(Double.class.getClassLoader());
+        this.DaysHigh = (Double) in.readValue(Double.class.getClassLoader());
+        this.mYearLow = (Double) in.readValue(Double.class.getClassLoader());
+        this.mYearHigh = (Double) in.readValue(Double.class.getClassLoader());
+        this.mMarketCapitalization = in.readString();
+        this.mEBITDA = in.readString();
+        this.mChangeFromYearLow = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPercentChangeFromYearLow = in.readString();
+        this.mChangeFromYearHigh = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPercebtChangeFromYearHigh = in.readString();
+        this.mLastTradeWithTime = in.readString();
+        this.mLastTradePriceOnly = (Double) in.readValue(Double.class.getClassLoader());
+        this.mDaysRange = in.readString();
+        this.mFiftydayMovingAverage = (Double) in.readValue(Double.class.getClassLoader());
+        this.mTwoHundreddayMovingAverage = (Double) in.readValue(Double.class.getClassLoader());
+        this.mChangeFromTwoHundreddayMovingAverage =
+                (Double) in.readValue(Double.class.getClassLoader());
+        this.mPercentChangeFromTwoHundreddayMovingAverage = in.readString();
+        this.mChangeFromFiftydayMovingAverage =
+                (Double) in.readValue(Double.class.getClassLoader());
+        this.mPercentChangeFromFiftydayMovingAverage = in.readString();
+        this.mName = in.readString();
+        this.mOpen = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPreviousClose = (Double) in.readValue(Double.class.getClassLoader());
+        this.mChangeinPercent = in.readString();
+        this.mPriceSales = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPriceBook = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPEGRatio = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPriceEPSEstimateCurrentYear = (Double) in.readValue(Double.class.getClassLoader());
+        this.mPriceEPSEstimateNextYear = (Double) in.readValue(Double.class.getClassLoader());
+        this.mSymbol = in.readString();
+        this.mShortRatio = (Double) in.readValue(Double.class.getClassLoader());
+        this.mLastTradeTime = in.readString();
+        this.mOneyrTargetPrice = (Double) in.readValue(Double.class.getClassLoader());
+        this.mVolume = (Double) in.readValue(Double.class.getClassLoader());
+        this.mYearRange = in.readString();
+        this.mStockExchange = in.readString();
+        this.mPercentChange = in.readString();
+    }
 
     public String getMsymbol() {
         return msymbol;
@@ -624,7 +644,6 @@ public class Quote extends StockBaseModel implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -682,73 +701,4 @@ public class Quote extends StockBaseModel implements Parcelable {
         dest.writeString(this.mStockExchange);
         dest.writeString(this.mPercentChange);
     }
-
-    public Quote() {
-    }
-
-    protected Quote(Parcel in) {
-        this.msymbol = in.readString();
-        this.mAsk = (Double) in.readValue(Double.class.getClassLoader());
-        this.mAverageDailyVolume = (Double) in.readValue(Double.class.getClassLoader());
-        this.mBid = (Double) in.readValue(Double.class.getClassLoader());
-        this.mBookValue = (Double) in.readValue(Double.class.getClassLoader());
-        this.mChangePercentChange = in.readString();
-        this.mChange = (String) in.readValue(String.class.getClassLoader());
-        this.mCurrency = in.readString();
-        this.mLastTradeDate = in.readString();
-        this.mEarningsShare = (Double) in.readValue(Double.class.getClassLoader());
-        this.mEPSEstimateCurrentYear = (String) in.readValue(String.class.getClassLoader());
-        this.mEPSEstimateNextYear = (String) in.readValue(String.class.getClassLoader());
-        this.mEPSEstimateNextQuarter = (String) in.readValue(String.class.getClassLoader());
-        this.mDaysLow = (Double) in.readValue(Double.class.getClassLoader());
-        this.DaysHigh = (Double) in.readValue(Double.class.getClassLoader());
-        this.mYearLow = (Double) in.readValue(Double.class.getClassLoader());
-        this.mYearHigh = (Double) in.readValue(Double.class.getClassLoader());
-        this.mMarketCapitalization = in.readString();
-        this.mEBITDA = in.readString();
-        this.mChangeFromYearLow = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPercentChangeFromYearLow = in.readString();
-        this.mChangeFromYearHigh = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPercebtChangeFromYearHigh = in.readString();
-        this.mLastTradeWithTime = in.readString();
-        this.mLastTradePriceOnly = (Double) in.readValue(Double.class.getClassLoader());
-        this.mDaysRange = in.readString();
-        this.mFiftydayMovingAverage = (Double) in.readValue(Double.class.getClassLoader());
-        this.mTwoHundreddayMovingAverage = (Double) in.readValue(Double.class.getClassLoader());
-        this.mChangeFromTwoHundreddayMovingAverage =
-                (Double) in.readValue(Double.class.getClassLoader());
-        this.mPercentChangeFromTwoHundreddayMovingAverage = in.readString();
-        this.mChangeFromFiftydayMovingAverage =
-                (Double) in.readValue(Double.class.getClassLoader());
-        this.mPercentChangeFromFiftydayMovingAverage = in.readString();
-        this.mName = in.readString();
-        this.mOpen = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPreviousClose = (Double) in.readValue(Double.class.getClassLoader());
-        this.mChangeinPercent = in.readString();
-        this.mPriceSales = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPriceBook = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPEGRatio = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPriceEPSEstimateCurrentYear = (Double) in.readValue(Double.class.getClassLoader());
-        this.mPriceEPSEstimateNextYear = (Double) in.readValue(Double.class.getClassLoader());
-        this.mSymbol = in.readString();
-        this.mShortRatio = (Double) in.readValue(Double.class.getClassLoader());
-        this.mLastTradeTime = in.readString();
-        this.mOneyrTargetPrice = (Double) in.readValue(Double.class.getClassLoader());
-        this.mVolume = (Double) in.readValue(Double.class.getClassLoader());
-        this.mYearRange = in.readString();
-        this.mStockExchange = in.readString();
-        this.mPercentChange = in.readString();
-    }
-
-    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
-        @Override
-        public Quote createFromParcel(Parcel source) {
-            return new Quote(source);
-        }
-
-        @Override
-        public Quote[] newArray(int size) {
-            return new Quote[size];
-        }
-    };
 }

@@ -7,5 +7,5 @@ package rajan.udacity.stock.hawk.touch_helper;
  */
 public interface ItemTouchHelperAdapter {
 
-  void onItemDismiss(int position);
+    void onItemDismiss(int position);
 }

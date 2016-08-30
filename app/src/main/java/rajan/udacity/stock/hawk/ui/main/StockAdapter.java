@@ -65,10 +65,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         notifyItemRemoved(position);
     }
 
-    public void setStocks(List<Quote> quotes) {
-        mQuoteList = quotes;
-    }
-
     public void setStock(Quote quote) {
         mQuoteList.add(quote);
         notifyDataSetChanged();
@@ -76,6 +72,10 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     public List<Quote> getStocks() {
         return mQuoteList;
+    }
+
+    public void setStocks(List<Quote> quotes) {
+        mQuoteList = quotes;
     }
 
     public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
@@ -88,11 +88,18 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         notifyDataSetChanged();
     }
 
+    public interface DismissStockListener {
+        void onStockDismiss(String symbol);
+    }
+
     class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        @BindView(R.id.stock_symbol) TextView tv_stock_symbol;
-        @BindView(R.id.bid_price) TextView tv_bid_price;
-        @BindView(R.id.change) TextView tv_change;
+        @BindView(R.id.stock_symbol)
+        TextView tv_stock_symbol;
+        @BindView(R.id.bid_price)
+        TextView tv_bid_price;
+        @BindView(R.id.change)
+        TextView tv_change;
 
         public StockViewHolder(View itemView) {
             super(itemView);
@@ -108,9 +115,5 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         public void onItemClear() {
             //itemView.setBackgroundColor(0);
         }
-    }
-
-    public interface DismissStockListener {
-        void onStockDismiss(String symbol);
     }
 }

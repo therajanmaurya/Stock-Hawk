@@ -21,10 +21,10 @@ public interface StocksService {
     String ENDPOINT = "https://query.yahooapis.com/v1/public/";
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
-    Observable<Stocks> getStocks(@Query(value="q", encoded=true) String q);
+    Observable<Stocks> getStocks(@Query(value = "q", encoded = true) String q);
 
     @GET(ApiEndPoint.YAHOO_QUERY_LANGUAGE + ApiEndPoint.RESPONSE_FORMAT)
-    Observable<Stock> getStock(@Query(value="q", encoded=true) String q);
+    Observable<Stock> getStock(@Query(value = "q", encoded = true) String q);
 
     /******** Helper class that sets up a new services *******/
     class Creator {

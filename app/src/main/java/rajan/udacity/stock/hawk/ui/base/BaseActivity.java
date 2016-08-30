@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import timber.log.Timber;
 import rajan.udacity.stock.hawk.StockHawkApplication;
 import rajan.udacity.stock.hawk.injection.component.ActivityComponent;
 import rajan.udacity.stock.hawk.injection.component.ConfigPersistentComponent;
 import rajan.udacity.stock.hawk.injection.component.DaggerConfigPersistentComponent;
 import rajan.udacity.stock.hawk.injection.module.ActivityModule;
+import timber.log.Timber;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles

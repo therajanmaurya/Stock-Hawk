@@ -14,7 +14,25 @@ import rajan.udacity.stock.hawk.data.model.Quote;
 
 public class Result implements Parcelable {
 
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
+        @Override
+        public Result createFromParcel(Parcel source) {
+            return new Result(source);
+        }
+
+        @Override
+        public Result[] newArray(int size) {
+            return new Result[size];
+        }
+    };
     List<Quote> quote = new ArrayList<>();
+
+    public Result() {
+    }
+
+    protected Result(Parcel in) {
+        this.quote = in.createTypedArrayList(Quote.CREATOR);
+    }
 
     public List<Quote> getQuote() {
         return quote;
@@ -31,7 +49,6 @@ public class Result implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -41,23 +58,4 @@ public class Result implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.quote);
     }
-
-    public Result() {
-    }
-
-    protected Result(Parcel in) {
-        this.quote = in.createTypedArrayList(Quote.CREATOR);
-    }
-
-    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
-        @Override
-        public Result createFromParcel(Parcel source) {
-            return new Result(source);
-        }
-
-        @Override
-        public Result[] newArray(int size) {
-            return new Result[size];
-        }
-    };
 }
