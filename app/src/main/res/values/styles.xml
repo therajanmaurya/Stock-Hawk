@@ -2,10 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme"
-           parent="Theme.AppCompat.Light">
+           parent="Theme.AppCompat">
         <item name="colorPrimary">@color/material_blue_500</item>
         <item name="colorPrimaryDark">@color/material_blue_700</item>
-        <item name="android:textColor">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
 
