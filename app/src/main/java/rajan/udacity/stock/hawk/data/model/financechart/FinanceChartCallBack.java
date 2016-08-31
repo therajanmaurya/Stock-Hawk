@@ -23,7 +23,7 @@ public class FinanceChartCallBack implements Parcelable {
     List<Double> mLabels = new ArrayList<>();
 
     @SerializedName("series")
-    List<SeriesList> mSeries;
+    List<Series> mSeries = new ArrayList<>();
 
     public Meta getMeta() {
         return mMeta;
@@ -49,11 +49,11 @@ public class FinanceChartCallBack implements Parcelable {
         mLabels = labels;
     }
 
-    public List<SeriesList> getSeries() {
+    public List<Series> getSeries() {
         return mSeries;
     }
 
-    public void setSeries(List<SeriesList> series) {
+    public void setSeries(List<Series> series) {
         mSeries = series;
     }
 
@@ -89,7 +89,7 @@ public class FinanceChartCallBack implements Parcelable {
         this.mDate = in.readParcelable(Date.class.getClassLoader());
         this.mLabels = new ArrayList<Double>();
         in.readList(this.mLabels, Double.class.getClassLoader());
-        this.mSeries = in.createTypedArrayList(SeriesList.CREATOR);
+        this.mSeries = in.createTypedArrayList(Series.CREATOR);
     }
 
     public static final Creator<FinanceChartCallBack> CREATOR =
