@@ -5,11 +5,11 @@ This Android App is the Udacity Nanodegree project-3 Stock Hawk. This applicatio
 ##Screenshots
 <table>
   <tr>
-    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s1.png"></td>
-    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s2.png"></td>
-    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s3.png"></td>
-    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s5.png"></td>
-    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s4.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Stock-Hawk/master/screenshots/s1.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Stock-Hawk/master/screenshots/s2.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Stock-Hawk/master/screenshots/s3.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Stock-Hawk/master/screenshots/s5.png"></td>
+    <td><img src="https://raw.githubusercontent.com/therajanmaurya/Stock-Hawk/master/screenshots/s4.png"></td>
   </tr>
 </table>
 
