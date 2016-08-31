@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import rajan.udacity.stock.hawk.BuildConfig;
 import rajan.udacity.stock.hawk.data.ApiEndPoint;
 import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartData;
 import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
 import rajan.udacity.stock.hawk.data.model.single.Stock;
+import rajan.udacity.stock.hawk.util.FinanceCardDeserializer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -30,7 +32,7 @@ public interface StocksService {
     Observable<Stock> getStock(@Query(value = "q", encoded = true) String q);
 
     @GET(FINANCE_CART_API_ENDPOINT + "{symbol}/" + "chartdata;type=quote;range=5y/json" )
-    Observable<FinanceChartData> getFinanceChartData(@Path("symbol") String symbol);
+    Observable<ResponseBody> getFinanceChartData(@Path("symbol") String symbol);
 
     /******** Helper class that sets up a new services *******/
     class Creator {
@@ -47,8 +49,10 @@ public interface StocksService {
 
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    .registerTypeAdapter(FinanceChartData.class, new FinanceCardDeserializer())
                     .setLenient()
                     .create();
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(StocksService.ENDPOINT)
                     .client(okHttpClient)

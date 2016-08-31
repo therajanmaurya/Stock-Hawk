@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Rajan Maurya on 31/08/16.
  */
@@ -17,10 +20,10 @@ public class FinanceChartCallBack implements Parcelable {
     Date mDate;
 
     @SerializedName("labels")
-    Labels mLabels;
+    List<Double> mLabels = new ArrayList<>();
 
     @SerializedName("series")
-    SeriesList mSeries;
+    List<SeriesList> mSeries;
 
     public Meta getMeta() {
         return mMeta;
@@ -38,19 +41,19 @@ public class FinanceChartCallBack implements Parcelable {
         mDate = date;
     }
 
-    public Labels getLabels() {
+    public List<Double> getLabels() {
         return mLabels;
     }
 
-    public void setLabels(Labels labels) {
+    public void setLabels(List<Double> labels) {
         mLabels = labels;
     }
 
-    public SeriesList getSeries() {
+    public List<SeriesList> getSeries() {
         return mSeries;
     }
 
-    public void setSeries(SeriesList series) {
+    public void setSeries(List<SeriesList> series) {
         mSeries = series;
     }
 
@@ -65,6 +68,9 @@ public class FinanceChartCallBack implements Parcelable {
     }
 
 
+    public FinanceChartCallBack() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -74,22 +80,20 @@ public class FinanceChartCallBack implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.mMeta, flags);
         dest.writeParcelable(this.mDate, flags);
-        dest.writeParcelable(this.mLabels, flags);
-        dest.writeParcelable(this.mSeries, flags);
-    }
-
-    public FinanceChartCallBack() {
+        dest.writeList(this.mLabels);
+        dest.writeTypedList(this.mSeries);
     }
 
     protected FinanceChartCallBack(Parcel in) {
         this.mMeta = in.readParcelable(Meta.class.getClassLoader());
         this.mDate = in.readParcelable(Date.class.getClassLoader());
-        this.mLabels = in.readParcelable(Labels.class.getClassLoader());
-        this.mSeries = in.readParcelable(SeriesList.class.getClassLoader());
+        this.mLabels = new ArrayList<Double>();
+        in.readList(this.mLabels, Double.class.getClassLoader());
+        this.mSeries = in.createTypedArrayList(SeriesList.CREATOR);
     }
 
-    public static final Parcelable.Creator<FinanceChartCallBack> CREATOR =
-            new Parcelable.Creator<FinanceChartCallBack>() {
+    public static final Creator<FinanceChartCallBack> CREATOR =
+            new Creator<FinanceChartCallBack>() {
         @Override
         public FinanceChartCallBack createFromParcel(Parcel source) {
             return new FinanceChartCallBack(source);

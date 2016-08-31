@@ -1,8 +1,16 @@
 package rajan.udacity.stock.hawk.ui.stockgraph;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+
 import javax.inject.Inject;
 
+import okhttp3.ResponseBody;
 import rajan.udacity.stock.hawk.data.DataManager;
+import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartCallBack;
 import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartData;
 import rajan.udacity.stock.hawk.injection.ConfigPersistent;
 import rajan.udacity.stock.hawk.ui.base.BasePresenter;
@@ -44,7 +52,7 @@ public class StockGraphPresenter extends BasePresenter<StockGraphMvpView> {
         mSubscription = mDataManager.getFinanceChartData(symbol)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<FinanceChartData>() {
+                .subscribe(new Subscriber<ResponseBody>() {
                     @Override
                     public void onCompleted() {
 
@@ -57,9 +65,29 @@ public class StockGraphPresenter extends BasePresenter<StockGraphMvpView> {
                     }
 
                     @Override
-                    public void onNext(FinanceChartData financeChartData) {
-                        getMvpView().showFinanceChartData(financeChartData);
-                        Timber.d(financeChartData.toString());
+                    public void onNext(ResponseBody financeChartData) {
+
+                        Gson gson=new Gson();
+
+                        String result = null;
+                        try {
+                            result = financeChartData.string();
+                            if (result.startsWith("finance_charts_json_callback( ")) {
+                                result = result.substring(29, result.length() - 2);
+                            }
+                        } catch (IOException | NullPointerException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+                        Type type = new TypeToken<FinanceChartData>() {}.getType();
+
+                         FinanceChartCallBack financeChartData1 =
+                                 gson.fromJson(result, FinanceChartCallBack.class);
+
+                        //getMvpView().showFinanceChartData(financeChartData1);
+                        Timber.d(financeChartData1.toString());
                         getMvpView().showProgressBar(false);
                     }
                 });
