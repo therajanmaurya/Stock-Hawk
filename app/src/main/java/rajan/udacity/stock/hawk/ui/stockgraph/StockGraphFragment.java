@@ -3,6 +3,7 @@ package rajan.udacity.stock.hawk.ui.stockgraph;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import rajan.udacity.stock.hawk.R;
-import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartData;
+import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartCallBack;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
 import rajan.udacity.stock.hawk.util.Constants;
 
@@ -69,8 +70,8 @@ public class StockGraphFragment extends Fragment implements StockGraphMvpView {
     }
 
     @Override
-    public void showFinanceChartData(FinanceChartData financeChartData) {
-        //Log.d(LOG_TAG, financeChartData.getFinanceChartsJsonCallback().getMeta().getCompanyName());
+    public void showFinanceChartData(FinanceChartCallBack financeChartCallBack) {
+        Log.d(LOG_TAG, financeChartCallBack.getMeta().getCompanyName());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package rajan.udacity.stock.hawk.ui.stockgraph;
 
-import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartData;
+import rajan.udacity.stock.hawk.data.model.financechart.FinanceChartCallBack;
 import rajan.udacity.stock.hawk.ui.base.MvpView;
 
 /**
@@ -10,7 +10,7 @@ public interface StockGraphMvpView extends MvpView {
 
     void showProgressBar(Boolean show);
 
-    void showFinanceChartData(FinanceChartData financeChartData);
+    void showFinanceChartData(FinanceChartCallBack financeChartCallBack);
 
     void showError();
 }
