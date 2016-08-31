@@ -80,7 +80,6 @@ public class StockGraphFragment extends Fragment implements StockGraphMvpView,
 
         ButterKnife.bind(this, rootView);
         mStockGraphPresenter.attachView(this);
-        getActivity().setTitle(mSymbol);
 
         initGraph();
 
@@ -112,7 +111,7 @@ public class StockGraphFragment extends Fragment implements StockGraphMvpView,
 
     @Override
     public void showFinanceChartData(FinanceChartCallBack financeChartCallBack) {
-
+        getActivity().setTitle(financeChartCallBack.getMeta().getCompanyName());
         lables = Utils.getPlottingLables(getActivity(), financeChartCallBack.getSeries());
         values = Utils.getPlottingValues(financeChartCallBack.getSeries());
 
