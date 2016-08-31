@@ -30,6 +30,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.stockgraph.StockGraphActivity"
+                  android:label="@string/finance_chart"/>
+
         <service android:name="rajan.udacity.stock.hawk.data.SyncService"/>
 
         <receiver

@@ -7,8 +7,26 @@ import android.os.Parcelable;
 
 public class Stock implements Parcelable {
 
+    public static final Creator<Stock> CREATOR = new Creator<Stock>() {
+        @Override
+        public Stock createFromParcel(Parcel source) {
+            return new Stock(source);
+        }
+
+        @Override
+        public Stock[] newArray(int size) {
+            return new Stock[size];
+        }
+    };
     @SerializedName("query")
     Query mQuery = new Query();
+
+    public Stock() {
+    }
+
+    protected Stock(Parcel in) {
+        this.mQuery = in.readParcelable(Query.class.getClassLoader());
+    }
 
     public Query getQuery() {
         return mQuery;
@@ -34,25 +52,6 @@ public class Stock implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.mQuery, flags);
     }
-
-    public Stock() {
-    }
-
-    protected Stock(Parcel in) {
-        this.mQuery = in.readParcelable(Query.class.getClassLoader());
-    }
-
-    public static final Creator<Stock> CREATOR = new Creator<Stock>() {
-        @Override
-        public Stock createFromParcel(Parcel source) {
-            return new Stock(source);
-        }
-
-        @Override
-        public Stock[] newArray(int size) {
-            return new Stock[size];
-        }
-    };
 }
 
 

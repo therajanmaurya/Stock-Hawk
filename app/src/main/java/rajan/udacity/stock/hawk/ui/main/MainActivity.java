@@ -29,11 +29,13 @@ import rajan.udacity.stock.hawk.data.SyncService;
 import rajan.udacity.stock.hawk.data.model.Quote;
 import rajan.udacity.stock.hawk.touch_helper.SimpleItemTouchHelperCallback;
 import rajan.udacity.stock.hawk.ui.base.BaseActivity;
+import rajan.udacity.stock.hawk.ui.stockgraph.StockGraphActivity;
+import rajan.udacity.stock.hawk.util.Constants;
 import rajan.udacity.stock.hawk.util.DialogFactory;
 import rajan.udacity.stock.hawk.util.NetworkUtil;
 
 public class MainActivity extends BaseActivity implements
-        MainMvpView, StockAdapter.DismissStockListener {
+        MainMvpView, StockAdapter.DismissAndOnClickItemStockListener {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "rajan.udacity.stock.hawk.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
@@ -56,6 +58,13 @@ public class MainActivity extends BaseActivity implements
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
         return intent;
+    }
+
+    @Override
+    public void onItemClick(String symbol) {
+        Intent intent = new Intent(this, StockGraphActivity.class);
+        intent.putExtra(Constants.SYMBOL, symbol);
+        startActivity(intent);
     }
 
     @Override
@@ -161,7 +170,7 @@ public class MainActivity extends BaseActivity implements
                                 if (checkSymbolExistOrNot(input.toString(),
                                         mStocksAdapter.getStocks())) {
                                     showStockAlreadyExist();
-                                } else if (!input.toString().isEmpty()){
+                                } else if (!input.toString().isEmpty()) {
                                     mMainPresenter.loadStock(input.toString());
                                 }
                             }
@@ -205,7 +214,7 @@ public class MainActivity extends BaseActivity implements
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_change_units){
+        if (id == R.id.action_change_units) {
             mMainPresenter.updateChangeInPercent();
         }
 

@@ -3,6 +3,7 @@ package rajan.udacity.stock.hawk.data;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import okhttp3.ResponseBody;
 import rajan.udacity.stock.hawk.data.local.DatabaseHelper;
 import rajan.udacity.stock.hawk.data.local.PreferencesHelper;
 import rajan.udacity.stock.hawk.data.model.multiple.Stocks;
@@ -69,5 +70,9 @@ public class DataManager {
 
     public Observable<Boolean> updateChangeInPercentInPref() {
         return getPreferencesHelper().updateChangeInPercentInPref();
+    }
+
+    public Observable<ResponseBody> getFinanceChartData(String symbol) {
+        return mStocksService.getFinanceChartData(symbol);
     }
 }

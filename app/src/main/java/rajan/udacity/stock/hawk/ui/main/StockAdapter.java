@@ -23,7 +23,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     private List<Quote> mQuoteList;
 
-    private DismissStockListener mDismissStockListener;
+    private DismissAndOnClickItemStockListener mDismissAndOnClickItemStockListener;
 
     private Boolean changeInPercent = false;
 
@@ -41,7 +41,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
-        Quote quote = mQuoteList.get(position);
+        final Quote quote = mQuoteList.get(position);
 
         holder.tv_stock_symbol.setText(quote.getMsymbol());
         holder.tv_bid_price.setText(String.valueOf(quote.getBid()));
@@ -52,6 +52,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
             holder.tv_change.setText(String.valueOf(quote.getChange()));
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDismissAndOnClickItemStockListener.onItemClick(quote.getMsymbol());
+            }
+        });
+
     }
 
     @Override
@@ -61,12 +68,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onItemDismiss(int position) {
-        mDismissStockListener.onStockDismiss(mQuoteList.get(position).getMsymbol());
+        mDismissAndOnClickItemStockListener.onStockDismiss(mQuoteList.get(position).getMsymbol());
         notifyItemRemoved(position);
-    }
-
-    public void setStocks(List<Quote> quotes) {
-        mQuoteList = quotes;
     }
 
     public void setStock(Quote quote) {
@@ -78,8 +81,16 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return mQuoteList;
     }
 
-    public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
-        mDismissStockListener = listener;
+    public String getStockSymbol(int position) {
+        return mQuoteList.get(position).getMsymbol();
+    }
+
+    public void setStocks(List<Quote> quotes) {
+        mQuoteList = quotes;
+    }
+
+    public StockAdapter setOnDismissStockListener(DismissAndOnClickItemStockListener listener) {
+        mDismissAndOnClickItemStockListener = listener;
         return this;
     }
 
@@ -88,11 +99,19 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         notifyDataSetChanged();
     }
 
+    public interface DismissAndOnClickItemStockListener {
+        void onStockDismiss(String symbol);
+        void onItemClick(String symbol);
+    }
+
     class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        @BindView(R.id.stock_symbol) TextView tv_stock_symbol;
-        @BindView(R.id.bid_price) TextView tv_bid_price;
-        @BindView(R.id.change) TextView tv_change;
+        @BindView(R.id.stock_symbol)
+        TextView tv_stock_symbol;
+        @BindView(R.id.bid_price)
+        TextView tv_bid_price;
+        @BindView(R.id.change)
+        TextView tv_change;
 
         public StockViewHolder(View itemView) {
             super(itemView);
@@ -108,9 +127,5 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         public void onItemClear() {
             //itemView.setBackgroundColor(0);
         }
-    }
-
-    public interface DismissStockListener {
-        void onStockDismiss(String symbol);
     }
 }

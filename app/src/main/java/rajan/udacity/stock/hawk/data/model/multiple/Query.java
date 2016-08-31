@@ -10,17 +10,35 @@ import android.os.Parcelable;
  */
 public class Query implements Parcelable {
 
+    public static final Parcelable.Creator<Query> CREATOR = new Parcelable.Creator<Query>() {
+        @Override
+        public Query createFromParcel(Parcel source) {
+            return new Query(source);
+        }
+
+        @Override
+        public Query[] newArray(int size) {
+            return new Query[size];
+        }
+    };
     @SerializedName("count")
     Integer mCount = 0;
-
     @SerializedName("created")
     String mCreated;
-
     @SerializedName("lang")
     String mLang;
-
     @SerializedName("results")
     Result mResult = new Result();
+
+    public Query() {
+    }
+
+    protected Query(Parcel in) {
+        this.mCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.mCreated = in.readString();
+        this.mLang = in.readString();
+        this.mResult = in.readParcelable(Result.class.getClassLoader());
+    }
 
     public Integer getCount() {
         return mCount;
@@ -64,7 +82,6 @@ public class Query implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,26 +94,4 @@ public class Query implements Parcelable {
         dest.writeString(this.mLang);
         dest.writeParcelable(this.mResult, flags);
     }
-
-    public Query() {
-    }
-
-    protected Query(Parcel in) {
-        this.mCount = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.mCreated = in.readString();
-        this.mLang = in.readString();
-        this.mResult = in.readParcelable(Result.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<Query> CREATOR = new Parcelable.Creator<Query>() {
-        @Override
-        public Query createFromParcel(Parcel source) {
-            return new Query(source);
-        }
-
-        @Override
-        public Query[] newArray(int size) {
-            return new Query[size];
-        }
-    };
 }

@@ -37,7 +37,7 @@ public class UrlBuilder {
             for (int i = 0; i < stocksSymbols.size(); ++i) {
                 if (i - (stocksSymbols.size() - 1) == 0) {
                     try {
-                        urlBuilder.append(URLEncoder.encode(stocksSymbols.get(i)+")", "UTF-8"));
+                        urlBuilder.append(URLEncoder.encode(stocksSymbols.get(i) + ")", "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

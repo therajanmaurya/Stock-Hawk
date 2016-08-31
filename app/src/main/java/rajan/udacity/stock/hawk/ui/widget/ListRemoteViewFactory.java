@@ -25,14 +25,12 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
         ListRemoteViewFactoryMvpView {
 
     private static final String LOG_TAG = ListRemoteViewFactory.class.getSimpleName();
-
+    private final Object mObject;
     @Inject
     ListRemoteViewFactoryPresenter mListRemoteViewFactoryPresenter;
-
     private Context mContext;
     private int mAppWidgetId;
     private List<Quote> mQuoteList;
-    private final Object mObject;
 
     public ListRemoteViewFactory(Context applicationContext, Intent intent) {
         mContext = applicationContext;
@@ -51,7 +49,7 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void onDataSetChanged() {
         mListRemoteViewFactoryPresenter.loadStocks();
-        synchronized(mObject) {
+        synchronized (mObject) {
             try {
                 // Calling wait() will block this thread until another thread
                 // calls notify() on the object.
@@ -87,7 +85,7 @@ public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void showStocks(List<Quote> quoteList) {
         mQuoteList = quoteList;
-        synchronized(mObject) {
+        synchronized (mObject) {
             mObject.notify();
         }
     }
