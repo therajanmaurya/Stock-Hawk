@@ -10,6 +10,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by Rajan Maurya on 30/08/16.
@@ -58,6 +59,7 @@ public class StockGraphPresenter extends BasePresenter<StockGraphMvpView> {
                     @Override
                     public void onNext(FinanceChartData financeChartData) {
                         getMvpView().showFinanceChartData(financeChartData);
+                        Timber.d(financeChartData.toString());
                         getMvpView().showProgressBar(false);
                     }
                 });

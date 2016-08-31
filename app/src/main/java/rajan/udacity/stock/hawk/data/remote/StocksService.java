@@ -47,6 +47,7 @@ public interface StocksService {
 
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    .setLenient()
                     .create();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(StocksService.ENDPOINT)

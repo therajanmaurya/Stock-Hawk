@@ -23,7 +23,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     private List<Quote> mQuoteList;
 
-    private DismissStockListener mDismissStockListener;
+    private DismissAndOnClickItemStockListener mDismissAndOnClickItemStockListener;
 
     private Boolean changeInPercent = false;
 
@@ -41,7 +41,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onBindViewHolder(final StockViewHolder holder, int position) {
-        Quote quote = mQuoteList.get(position);
+        final Quote quote = mQuoteList.get(position);
 
         holder.tv_stock_symbol.setText(quote.getMsymbol());
         holder.tv_bid_price.setText(String.valueOf(quote.getBid()));
@@ -52,6 +52,13 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
             holder.tv_change.setText(String.valueOf(quote.getChange()));
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDismissAndOnClickItemStockListener.onItemClick(quote.getMsymbol());
+            }
+        });
+
     }
 
     @Override
@@ -61,7 +68,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onItemDismiss(int position) {
-        mDismissStockListener.onStockDismiss(mQuoteList.get(position).getMsymbol());
+        mDismissAndOnClickItemStockListener.onStockDismiss(mQuoteList.get(position).getMsymbol());
         notifyItemRemoved(position);
     }
 
@@ -82,8 +89,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         mQuoteList = quotes;
     }
 
-    public StockAdapter setOnDismissStockListener(DismissStockListener listener) {
-        mDismissStockListener = listener;
+    public StockAdapter setOnDismissStockListener(DismissAndOnClickItemStockListener listener) {
+        mDismissAndOnClickItemStockListener = listener;
         return this;
     }
 
@@ -92,8 +99,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         notifyDataSetChanged();
     }
 
-    public interface DismissStockListener {
+    public interface DismissAndOnClickItemStockListener {
         void onStockDismiss(String symbol);
+        void onItemClick(String symbol);
     }
 
     class StockViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
