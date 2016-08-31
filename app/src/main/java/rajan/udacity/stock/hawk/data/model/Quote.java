@@ -20,118 +20,154 @@ import rajan.udacity.stock.hawk.data.local.StockDatabase;
 @ModelContainer
 public class Quote extends StockBaseModel implements Parcelable {
 
-    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
-        @Override
-        public Quote createFromParcel(Parcel source) {
-            return new Quote(source);
-        }
-
-        @Override
-        public Quote[] newArray(int size) {
-            return new Quote[size];
-        }
-    };
     @SerializedName("symbol")
     @PrimaryKey
     @Column
     String msymbol;
+
     @SerializedName("Ask")
     Double mAsk;
     @SerializedName("AverageDailyVolume")
     Double mAverageDailyVolume;
+
     @SerializedName("Bid")
     @Column
     Double mBid;
+
     @SerializedName("BookValue")
     Double mBookValue;
+
     @SerializedName("Change_PercentChange")
     String mChangePercentChange;
+
     @SerializedName("Change")
     @Column
     String mChange;
+
     @SerializedName("Currency")
     String mCurrency;
+
     @SerializedName("LastTradeDate")
     String mLastTradeDate;
+
     @SerializedName("EarningsShare")
     Double mEarningsShare;
+
     @SerializedName("EPSEstimateCurrentYear")
     String mEPSEstimateCurrentYear;
+
     @SerializedName("EPSEstimateNextYear")
     String mEPSEstimateNextYear;
+
     @SerializedName("EPSEstimateNextQuarter")
     String mEPSEstimateNextQuarter;
+
     @SerializedName("DaysLow")
     Double mDaysLow;
+
     @SerializedName("DaysHigh")
     Double DaysHigh;
+
     @SerializedName("YearLow")
     Double mYearLow;
+
     @SerializedName("YearHigh")
     Double mYearHigh;
+
     @SerializedName("MarketCapitalization")
     String mMarketCapitalization;
+
     @SerializedName("EBITDA")
     String mEBITDA;
+
     @SerializedName("ChangeFromYearLow")
     Double mChangeFromYearLow;
+
     @SerializedName("PercentChangeFromYearLow")
     String mPercentChangeFromYearLow;
+
     @SerializedName("ChangeFromYearHigh")
     Double mChangeFromYearHigh;
+
     @SerializedName("PercebtChangeFromYearHigh")
     String mPercebtChangeFromYearHigh;
+
     @SerializedName("LastTradeWithTime")
     String mLastTradeWithTime;
+
     @SerializedName("LastTradePriceOnly")
     Double mLastTradePriceOnly;
+
     @SerializedName("DaysRange")
     String mDaysRange;
+
     @SerializedName("FiftydayMovingAverage")
     Double mFiftydayMovingAverage;
+
     @SerializedName("TwoHundreddayMovingAverage")
     Double mTwoHundreddayMovingAverage;
+
     @SerializedName("ChangeFromTwoHundreddayMovingAverage")
     Double mChangeFromTwoHundreddayMovingAverage;
+
     @SerializedName("PercentChangeFromTwoHundreddayMovingAverage")
     String mPercentChangeFromTwoHundreddayMovingAverage;
+
     @SerializedName("ChangeFromFiftydayMovingAverage")
     Double mChangeFromFiftydayMovingAverage;
+
     @SerializedName("PercentChangeFromFiftydayMovingAverage")
     String mPercentChangeFromFiftydayMovingAverage;
+
     @SerializedName("Name")
     String mName;
+
     @SerializedName("Open")
     Double mOpen;
+
     @SerializedName("PreviousClose")
     Double mPreviousClose;
+
     @SerializedName("ChangeinPercent")
     @Column
     String mChangeinPercent;
+
     @SerializedName("PriceSales")
     Double mPriceSales;
+
     @SerializedName("PriceBook")
     Double mPriceBook;
+
     @SerializedName("PEGRatio")
     Double mPEGRatio;
+
     @SerializedName("PriceEPSEstimateCurrentYear")
     Double mPriceEPSEstimateCurrentYear;
+
     @SerializedName("PriceEPSEstimateNextYear")
     Double mPriceEPSEstimateNextYear;
+
     @SerializedName("Symbol")
     String mSymbol;
+
     @SerializedName("ShortRatio")
     Double mShortRatio;
+
     @SerializedName("LastTradeTime")
     String mLastTradeTime;
+
     @SerializedName("OneyrTargetPrice")
     Double mOneyrTargetPrice;
+
     @SerializedName("Volume")
     Double mVolume;
+
     @SerializedName("YearRange")
     String mYearRange;
+
     @SerializedName("StockExchange")
     String mStockExchange;
+
     @SerializedName("PercentChange")
     String mPercentChange;
 
@@ -701,4 +737,16 @@ public class Quote extends StockBaseModel implements Parcelable {
         dest.writeString(this.mStockExchange);
         dest.writeString(this.mPercentChange);
     }
+
+    public static final Creator<Quote> CREATOR = new Creator<Quote>() {
+        @Override
+        public Quote createFromParcel(Parcel source) {
+            return new Quote(source);
+        }
+
+        @Override
+        public Quote[] newArray(int size) {
+            return new Quote[size];
+        }
+    };
 }
