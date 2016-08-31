@@ -1,6 +1,17 @@
 # Stock Hawk Udacity Project-3
 
-This Android App is the project-3 Stock Hawk of the Udacity. This application uses the yahoo API of stocks and giving ability to view the stocks and other core  functionlity that help to visualize and stock . This project following the [Ribot](https://github.com/ribot/android-guidelines) guide lines.
+This Android App is the Udacity Nanodegree project-3 Stock Hawk. This application uses the yahoo API of stocks and giving ability to view the stocks and other core  functionlity that help to visualize the stock . This project following the [Ribot](https://github.com/ribot/android-guidelines) guide lines.
+
+##Screenshots
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s1.png"></td>
+    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s2.png"></td>
+    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s3.png"></td>
+    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s5.png"></td>
+    <td><img src="https://raw.githubusercontent.com/pa1pal/StockHawk/master/screenshots/s4.png"></td>
+  </tr>
+</table>
 
 Libraries and tools included:
 
@@ -13,7 +24,6 @@ Libraries and tools included:
 - [Butterknife](https://github.com/JakeWharton/butterknife)
 - [Timber](https://github.com/JakeWharton/timber)
 - [Glide](https://github.com/bumptech/glide)
-- [AutoValue](https://github.com/google/auto/tree/master/value) with extensions [AutoValueParcel](https://github.com/rharter/auto-value-parcel) and [AutoValueGson](https://github.com/rharter/auto-value-gson)
 - Functional tests with [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/index.html)
 - [Robolectric](http://robolectric.org/)
 - [Mockito](http://mockito.org/)
