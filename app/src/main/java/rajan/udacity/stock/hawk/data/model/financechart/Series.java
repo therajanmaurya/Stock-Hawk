@@ -11,10 +11,10 @@ import android.os.Parcelable;
 public class Series implements Parcelable {
 
     @SerializedName("Date")
-    Double mDate;
+    String mDate;
 
     @SerializedName("close")
-    Double mClose;
+    Float mClose;
 
     @SerializedName("high")
     Double mHigh;
@@ -28,19 +28,19 @@ public class Series implements Parcelable {
     @SerializedName("volume")
     Double mVolume;
 
-    public Double getDate() {
+    public String getDate() {
         return mDate;
     }
 
-    public void setDate(Double date) {
+    public void setDate(String date) {
         mDate = date;
     }
 
-    public Double getClose() {
+    public Float getClose() {
         return mClose;
     }
 
-    public void setClose(Double close) {
+    public void setClose(Float close) {
         mClose = close;
     }
 
@@ -108,8 +108,8 @@ public class Series implements Parcelable {
     }
 
     protected Series(Parcel in) {
-        this.mDate = (Double) in.readValue(Double.class.getClassLoader());
-        this.mClose = (Double) in.readValue(Double.class.getClassLoader());
+        this.mDate = (String) in.readValue(String.class.getClassLoader());
+        this.mClose = (Float) in.readValue(Float.class.getClassLoader());
         this.mHigh = (Double) in.readValue(Double.class.getClassLoader());
         this.mLow = (Double) in.readValue(Double.class.getClassLoader());
         this.mOpen = (Double) in.readValue(Double.class.getClassLoader());

@@ -12,5 +12,7 @@ public interface StockGraphMvpView extends MvpView {
 
     void showFinanceChartData(FinanceChartCallBack financeChartCallBack);
 
+    void initGraph();
+
     void showError();
 }

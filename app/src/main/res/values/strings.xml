@@ -18,5 +18,6 @@
     <string name="stocks_already_exist" translatable="true">This stock is already saved!</string>
     <string name="stock_does_not_exist" translatable="true">Stock does not exist.</string>
     <string name="stock_graph_desc" translatable="true">This is Stock Graph</string>
-    <string name="finance_chart">Finance Chart</string>
+    <string name="finance_chart" translatable="true">Finance Chart</string>
+    <string name="failed_to_load_finanace_chart_data" translatable="true">Failed To Load Finance Chart Data</string>
 </resources>
