@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,13 +84,19 @@ public class StockGraphFragment extends Fragment implements StockGraphMvpView,
 
         initGraph();
 
+        mStockGraphPresenter.loadFinanceChartData(mSymbol);
+
         return rootView;
     }
 
+    @SuppressWarnings(value = "unchecked")
     @Override
-    public void onStart() {
-        super.onStart();
-        mStockGraphPresenter.loadFinanceChartData(mSymbol);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            lables = savedInstanceState.getStringArrayList(Constants.GRAPH_LABLES);
+            values = (List<Float>) savedInstanceState.getSerializable(Constants.GRAPH_VALUES);
+        }
     }
 
     @Override
@@ -168,6 +175,15 @@ public class StockGraphFragment extends Fragment implements StockGraphMvpView,
     public void onDestroyView() {
         super.onDestroyView();
         mStockGraphPresenter.detachView();
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putStringArrayList(Constants.GRAPH_LABLES, (ArrayList<String>) lables);
+        savedInstanceState.putSerializable(Constants.GRAPH_VALUES, (Serializable) values);
+
 
     }
 

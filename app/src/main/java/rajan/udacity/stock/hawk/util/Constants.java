@@ -15,6 +15,10 @@ public class Constants {
 
     public static String SYMBOL = "symbol";
 
+    public static String GRAPH_LABLES = "graph lables";
+
+    public static String GRAPH_VALUES = "graph values";
+
     public static String CLICK_ACTION = "rajan.udacity.stock.hawk.quotelistwidget.CLICKQUOTE";
 
 }
