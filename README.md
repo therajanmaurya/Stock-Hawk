@@ -36,6 +36,9 @@ Libraries and tools included:
 - Android N [(API 24) ](http://developer.android.com/tools/revisions/platforms.html).
 - Latest Android SDK Tools and build tools.
 
+## Contributing
+
+If you would like to contribute to Stock Hawk, the [contributing guide](https://github.com/therajanmaurya/Stock-Hawk/blob/master/CONTRIBUTING.md) is a good place to start. If you have questions, feel free to ask.
 
 ## Architecture
 
