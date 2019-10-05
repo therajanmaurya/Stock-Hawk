@@ -124,3 +124,4 @@ To upload a release build to Crashlytics run:
 ```
 ./gradlew assembleRelease crashlyticsUploadDistributionRelease
 ```
+
